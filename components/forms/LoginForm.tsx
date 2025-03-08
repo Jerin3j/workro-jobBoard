@@ -32,7 +32,7 @@ export const LoginForm = async () => {
             action={async () => {
                 "use server";
                 await signIn("google", {
-                  redirectTo: "/",
+                  redirectTo: "/onboarding",
                 });
               }}>
               <GeneralSubmitButton
@@ -46,7 +46,7 @@ export const LoginForm = async () => {
               action={async () => {
                 "use server";
                 await signIn("github", {
-                  redirectTo: "/",
+                  redirectTo: "/onboarding",
                 });
               }}
             >
