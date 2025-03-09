@@ -8,3 +8,9 @@ export const companyScema = z.object({
     website: z.string().url('Please provide a valid url'),
     LinkedinAccount: z.string().optional(),
 })
+
+export const userSchema = z.object({
+    name: z.string().min(2, 'Name must be atleast 2 characters long.'),
+    bio: z.string().min(10, 'Please provide some information about yourself.'),
+    resume: z.string().min(1, 'Please upload a resume.'),
+})

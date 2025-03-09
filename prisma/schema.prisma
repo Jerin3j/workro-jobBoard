@@ -46,7 +46,7 @@ model Company {
 model JobSeeker {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  about     String
+  bio     String
   resume    String
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @unique @db.ObjectId
