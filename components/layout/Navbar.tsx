@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { Button } from '../ui/button'
+import { Button, buttonVariants } from '../ui/button'
 import { ThemeToggle } from './ButtonToggle'
 import { auth, signOut } from '@/app/utils/auth'
 import { redirect } from 'next/navigation'
+import { UserDropdown } from './UserDropdown'
 
 export const Navbar = async() => {
 
@@ -13,32 +14,22 @@ export const Navbar = async() => {
 
   return (
     <nav className="flex items-center justify-between py-5">
-        <Link href={''} className='flex items-center'>
-        <Image src={'/logo.png'} width={40} height={40} alt=''/>
+      <Link href={"/"} className="flex items-center">
+        <Image src={"/logo.png"} width={40} height={40} alt="" />
         <h1 className="text-2xl font-bold">
-            Workro
-            <span className='text-primary'>!</span>
+          Workro
+          <span className="text-primary">!</span>
         </h1>
-        </Link>
-        <div className="flex items-center gap-4">
-          <ThemeToggle/>
-       {session?.user ?
-       <form action={async () =>{
-        "use server"
-        await signOut({redirectTo: '/'})
-       }}>
-        <Button>Logout</Button>
-       </form>
-       :
-       <form action={async ()=> {
-        "use server"
-        redirect('/login')
-       }}>
-        <Button variant={'outline'}>Login</Button>
-       </form>
-       }
-
-        </div>
+      </Link>
+      <div className="hidden md:flex items-center gap-4">
+      <ThemeToggle/>
+      <Link href={'/post-job'} className={buttonVariants({size: 'lg'})}>Post Job</Link>
+      {session?.user ? (
+        <UserDropdown name={session.user.name!} email={session.user.email!} image={session.user.image!}/>
+      ): (
+        <Link href='/login' className={buttonVariants({variant: 'outline'})}>Login</Link>
+      )}
+      </div>
     </nav>
-  )
+  );
 }

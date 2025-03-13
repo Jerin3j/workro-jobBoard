@@ -8,14 +8,18 @@ import { companyScema } from '@/app/utils/zodSchemas';
 import { createCompany } from '@/app/actions';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { countryList } from '@/app/utils/countries';
 import { Textarea } from '@/components/ui/textarea';
 import { UploadDropzone } from '@/components/layout/UploadWrapper';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { IndianCities } from '@/app/utils/IndianCities';
 
 export const CompanyForm = () => {
   const [pending, setPending] = useState(false);
+
+    //array of objs into flat array
+    const indianCities = Object.entries(IndianCities).flatMap(([key, values])=> values.map((value)=> `${key}, ${value}`))
+  
 
   const form = useForm({
     resolver: zodResolver(companyScema),
@@ -83,10 +87,9 @@ export const CompanyForm = () => {
                     </SelectGroup>
                     <SelectGroup>
                       <SelectLabel>Location</SelectLabel>
-                      {countryList.map((country) => (
-                        <SelectItem key={country.code} value={country.name}>
-                          <span>{country.code}</span>
-                          <span className="pl-2">{country.name}</span>
+                      {indianCities.map((city) => (
+                        <SelectItem key={city} value={city}>
+                          <span className="pl-2">{city}</span>
                         </SelectItem>
                       ))}
                     </SelectGroup>
