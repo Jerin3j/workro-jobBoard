@@ -8,18 +8,20 @@ import { userSchema } from "./utils/zodSchemas";
 import { z } from "zod";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
+import Razorpay from "razorpay";
 
-const aj = arcjet.withRule(
-  shield({
-    mode: 'LIVE'
-  })
-).withRule(
-  detectBot({
-    mode: 'LIVE',
-    allow: []
-  })
-)
-
+const aj = arcjet
+  .withRule(
+    shield({
+      mode: "LIVE",
+    })
+  )
+  .withRule(
+    detectBot({
+      mode: "LIVE",
+      allow: [],
+    })
+  );
 
 export const createCompany = async (data: z.infer<typeof companyScema>) => {
   const session = await requireUser();
@@ -27,8 +29,8 @@ export const createCompany = async (data: z.infer<typeof companyScema>) => {
   const req = await request();
   const decision = await aj.protect(req);
 
-  if(decision.isDenied()){
-    throw new Error("Forbidden")
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
   }
   const validateData = companyScema.parse(data);
 
@@ -49,17 +51,16 @@ export const createCompany = async (data: z.infer<typeof companyScema>) => {
   return redirect("/");
 };
 
-
 export const createJobSeeker = async (data: z.infer<typeof userSchema>) => {
   const session = await requireUser();
- //arcjet validation
- const req = await request();
- const decision = await aj.protect(req);
+  //arcjet validation
+  const req = await request();
+  const decision = await aj.protect(req);
 
- if(decision.isDenied()){
-   throw new Error("Forbidden")
- }
- 
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
   const validateData = userSchema.parse(data);
 
   await prisma.user.update({
@@ -68,57 +69,95 @@ export const createJobSeeker = async (data: z.infer<typeof userSchema>) => {
     },
     data: {
       onBoardingCompleted: true,
-      userType: 'JOB_SEEKER',
+      userType: "JOB_SEEKER",
       JobSeeker: {
         create: {
-          ...validateData
+          ...validateData,
         },
       },
+    },
+  });
+  return redirect("/");
+};
+
+export const createJob = async (data: z.infer<typeof jobSchema>) => {
+  try {
+    const session = await requireUser();
+    
+    if (!session || !session.email || !session.name || !session.id) {
+      throw new Error("Session data is missing or invalid");
     }
-  })
-  return redirect("/")
-}
 
+    const req = await request();
+    const decision = await aj.protect(req);
+    if (decision.isDenied()) {
+      throw new Error(" Forbidden: User is not authorized.");
+    }
 
-export const createJob = async(data: z.infer<typeof jobSchema>) => {
-  const session = await requireUser();
+    const validateData = jobSchema.parse(data);
 
-  const req = await request();
-  const decision = await aj.protect(req);
+    const company = await prisma.company.findUnique({
+      where: { userId: session.id },
+      select: {
+        id: true,
+        user: { select: { razorpayCustomerId: true } },
+      },
+    });
 
- if(decision.isDenied()){
-  throw new Error("Forbidden")
-}
+    if (!company?.id) {
+      console.log("No company found for user:", session.id);
+      return redirect("/");
+    }
 
-const validateData = jobSchema.parse(data);
+    let razorpayCustomerId = company.user.razorpayCustomerId;
 
-const company = await prisma.company.findUnique({
-  where: {
-    userId: session.id   //session means loggined user obj
-  },
-  select: {
-    id: true
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY,
+      key_secret: process.env.RAZORPAY_SECRET,
+    });
+
+    try {
+      const uniqueEmail = `${session.email.split("@")[0]}+${Date.now()}@${
+        session.email.split("@")[1]
+      }`;
+
+      const customer = await razorpay.customers.create({
+        email: uniqueEmail,
+        name: session.name,
+      });
+
+      razorpayCustomerId = customer.id;
+
+       await prisma.user.findUnique({
+        where: { id: session.id },
+      });
+
+      await prisma.user.update({
+        where: { id: session.id },
+        data: { razorpayCustomerId: customer.id },
+      });
+
+    } catch (error) {
+      throw new Error("Failed to create Razorpay customer");
+    }
+
+    const jobPost = await prisma.jobPost.create({
+      data: {
+        jobTitle: validateData.jobTitle,
+        jobDescription: validateData.jobDescription,
+        employmentType: validateData.employmentType,
+        location: validateData.location,
+        salaryFrom: validateData.salaryFrom,
+        salaryTo: validateData.salaryTo,
+        listingDuration: validateData.listingDuration,
+        benefits: validateData.benefits,
+        companyId: company.id,
+      },
+      select: { id: true },
+    });
+    return jobPost;
+
+  } catch (error) {
+    console.error("Error in createJob function:", error);
   }
-})
-
-if(!company?.id){
-  return redirect("/")
-}
-
-await prisma.jobPost.create({
-  data:{
-    jobTitle: validateData.jobTitle,
-    jobDescription: validateData.jobDescription,
-    employmentType: validateData.employmentType,
-    location: validateData.location,
-    salaryFrom: validateData.salaryFrom,
-    salaryTo: validateData.salaryTo,
-    listingDuration: validateData.listingDuration,
-    benefits: validateData.benefits,
-    companyId: company?.id
-  }
-})
-
-return redirect("/")
-
-}
+};

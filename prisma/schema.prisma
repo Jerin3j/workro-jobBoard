@@ -17,6 +17,7 @@ model User {
   sessions            Session[]
   company             Company?
   JobSeeker           JobSeeker?
+  razorpayCustomerId  String?          @unique
   userType            userType?
   onBoardingCompleted Boolean         @default(false)
   Authenticator       Authenticator[]

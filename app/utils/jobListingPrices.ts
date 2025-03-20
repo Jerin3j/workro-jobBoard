@@ -6,7 +6,7 @@ interface iAppProps {
 export const jobListingPrices: iAppProps[] = [
     {
       days: 7,
-      price:  "Free",
+      price: "Free",
       description: "Basic Visibility - Perfect for short-term listings."
     },
     {
