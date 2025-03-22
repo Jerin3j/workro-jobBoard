@@ -9,6 +9,7 @@ import { z } from "zod";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
 import Razorpay from "razorpay";
+import { inngest } from "./utils/inngest/client";
 
 const aj = arcjet
   .withRule(
@@ -155,6 +156,16 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
       },
       select: { id: true },
     });
+    
+    //inngest setting 
+    await inngest.send({
+      name: 'job/created',
+      data: {
+        jobId: jobPost.id,
+        expirationDays: validateData.listingDuration,
+      }
+    })
+    
     return jobPost;
 
   } catch (error) {
