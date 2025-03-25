@@ -9,7 +9,7 @@ import { createCompany } from '@/app/actions';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { UploadDropzone } from '@/components/layout/UploadWrapper';
+import { UploadDropzone } from '@/components/layouts/UploadWrapper';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { IndianCities } from '@/app/utils/IndianCities';

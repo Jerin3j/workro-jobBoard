@@ -1,0 +1,59 @@
+[33mcommit 4dbfd6f105b98ac5fab32361a1711d58d7deaf62[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: unknown <jerinjj202@gmail.com>
+Date:   Sat Mar 22 13:03:32 2025 +0530
+
+    Removed .env from repository
+
+[33mcommit c7a6f3adec2352d80b539ebb5b8e9698393f7841[m
+Author: unknown <jerinjj202@gmail.com>
+Date:   Sat Mar 22 10:54:27 2025 +0530
+
+    feat: Implemented Inngest for active jobs listing status expiration
+
+[33mcommit 9b209e820db7b12a969068094d5c855ccb349e37[m
+Author: unknown <jerinjj202@gmail.com>
+Date:   Thu Mar 20 23:46:10 2025 +0530
+
+    feat: Added Razorpay, payment success and failure redirects with improved error handling
+
+[33mcommit 3a46e3904527a1ef30ce1aee90e8a285f005781b[m
+Author: unknown <jerinjj202@gmail.com>
+Date:   Thu Mar 13 12:16:07 2025 +0530
+
+    feat: Created job posting with Tiptap editor for description & changed job location globally to Indian cities
+
+[33mcommit 4d89143fd3828a43c71b41459525e1c47fff7a24[m
+Author: unknown <jerinjj202@gmail.com>
+Date:   Sun Mar 9 18:24:28 2025 +0530
+
+    jobseeker form completed and integrated Arcjet for security( OWASP )
+
+[33mcommit 7f52366ceca42edb5f986fefc3b768c351d76bdb[m
+Author: unknown <jerinjj202@gmail.com>
+Date:   Sat Mar 8 17:00:06 2025 +0530
+
+    feat: add onboarding for company form, update Prisma schema, and integrate UploadThing for file storage
+
+[33mcommit deb36c260eacb49c4745df0a97c65750464e0b85[m
+Author: unknown <jerinjj202@gmail.com>
+Date:   Thu Mar 6 17:14:50 2025 +0530
+
+    error in auth client id
+
+[33mcommit 18e429e8e2f820d77691705bf2c0acd7e00c810f[m
+Author: unknown <jerinjj202@gmail.com>
+Date:   Thu Mar 6 17:12:22 2025 +0530
+
+    Prima and mongodb adding
+
+[33mcommit adb90b6f3f87299a58806fa3d14a5a8f9e9a4fb8[m
+Author: unknown <jerinjj202@gmail.com>
+Date:   Tue Mar 4 22:30:57 2025 +0530
+
+    workro initialised
+
+[33mcommit 9f771ccc0549c644150460c0eba57e0fa51870ca[m
+Author: unknown <jerinjj202@gmail.com>
+Date:   Tue Mar 4 16:13:27 2025 +0530
+
+    Initial commit from Create Next App

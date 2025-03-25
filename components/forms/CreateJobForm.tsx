@@ -25,17 +25,17 @@ import {
   SelectValue,
 } from "../ui/select";
 import { useForm } from "react-hook-form";
-import { SalaryRangeSelector } from "../layout/SalaryRangeSelector";
+import { SalaryRangeSelector } from "../layouts/SalaryRangeSelector";
 import JobDescriptionEditor from "../RichTextEditor.tsx/JobDescriptionEditor";
-import BenefitsSelector from "../layout/BenefitsSelector";
+import BenefitsSelector from "../layouts/BenefitsSelector";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { Key, XIcon } from "lucide-react";
-import { UploadDropzone } from "../layout/UploadWrapper";
-import JobListingSelector from "../layout/JobListingSelector";
+import { UploadDropzone } from "../layouts/UploadWrapper";
+import JobListingSelector from "../layouts/JobListingSelector";
 import { createJob } from "@/app/actions";
 import { IndianCities } from "@/app/utils/IndianCities";
-import { handlePayment } from "../layout/handlePayment";
+import { handlePayment } from "../layouts/handlePayment";
 import Script from "next/script";
 import { jobListingPrices } from "@/app/utils/jobListingPrices";
 

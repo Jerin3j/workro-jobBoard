@@ -9,7 +9,7 @@ import {
 import GoogleIcon from "../icons/GoogleIcon";
 import GithubIcon from "../icons/GithubIcon";
 import { auth, signIn } from "@/app/utils/auth";
-import { GeneralSubmitButton } from "../layout/SubmitButton";
+import { GeneralSubmitButton } from "../layouts/SubmitButton";
 import { redirect } from "next/navigation";
 
 export const LoginForm = async () => {
