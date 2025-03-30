@@ -27,7 +27,7 @@ type iAppProps = {
 
 export default function JobCard({job}: iAppProps) {
   return (
-   <Link href={`/job`}>
+   <Link href={`/job/${job.id}`}>
     <Card className='hover:border-primary hover:shadow-lg transition-all duration-300'>
         <CardHeader>
             <div className="flex flex-col md:flex-row gap-4">
