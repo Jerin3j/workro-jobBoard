@@ -43,9 +43,9 @@ export const UserDropdown = ({ email, image, name }: UserProps) => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href={"/favorites"}>
+            <Link href={"/saved-jobs"}>
               <Heart size={16} strokeWidth={2} className="opacity-60" />
-              <span>Favorite Jobs</span>
+              <span>Saved Jobs</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
