@@ -5,11 +5,12 @@ import { prisma } from "./utils/db";
 import requireUser from "./utils/requireUser";
 import { companyScema, jobSchema } from "./utils/zodSchemas";
 import { userSchema } from "./utils/zodSchemas";
-import { z } from "zod";
+import { date, z } from "zod";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
 import Razorpay from "razorpay";
 import { inngest } from "./utils/inngest/client";
+import { revalidatePath } from "next/cache";
 
 const aj = arcjet
   .withRule(
@@ -84,7 +85,7 @@ export const createJobSeeker = async (data: z.infer<typeof userSchema>) => {
 export const createJob = async (data: z.infer<typeof jobSchema>) => {
   try {
     const session = await requireUser();
-    
+
     if (!session || !session.email || !session.name || !session.id) {
       throw new Error("Session data is missing or invalid");
     }
@@ -129,7 +130,7 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
 
       razorpayCustomerId = customer.id;
 
-       await prisma.user.findUnique({
+      await prisma.user.findUnique({
         where: { id: session.id },
       });
 
@@ -137,7 +138,6 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
         where: { id: session.id },
         data: { razorpayCustomerId: customer.id },
       });
-
     } catch (error) {
       throw new Error("Failed to create Razorpay customer");
     }
@@ -156,19 +156,57 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
       },
       select: { id: true },
     });
-    
-    //inngest setting 
+
+    //inngest setting
     await inngest.send({
-      name: 'job/created',
+      name: "job/created",
       data: {
         jobId: jobPost.id,
         expirationDays: validateData.listingDuration,
-      }
-    })
-    
-    return jobPost;
+      },
+    });
 
+    return jobPost;
   } catch (error) {
     console.error("Error in createJob function:", error);
   }
+};
+
+export const saveJobPost = async (jobId: string) => {
+  const user = await requireUser();
+  const req = await request();
+  const decision = await aj.protect(req);
+
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+  await prisma.savedJobPost.create({
+    data: {
+      jobPostId: jobId,
+      userId: user.id as string,
+    },
+  });
+
+  revalidatePath(`/job/${jobId}`);
+};
+
+export const unSaveJobPost = async (savedJobPostId: string) => {
+  const user = await requireUser();
+  const req = await request();
+  const decision = await aj.protect(req);
+
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+  const data = await prisma.savedJobPost.delete({
+    where: {
+      id: savedJobPostId,
+      userId: user.id as string,
+    },
+    select: {
+      jobPostId: true,
+    },
+  });
+
+  revalidatePath(`/job/${data.jobPostId}`);
 };
