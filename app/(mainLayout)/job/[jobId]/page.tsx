@@ -1,3 +1,5 @@
+import arcjet, { detectBot } from '@/app/utils/arcjet'
+import { auth } from '@/app/utils/auth'
 import { prisma } from '@/app/utils/db'
 import { benefits } from '@/app/utils/listOfBenefits'
 import JsonToHtml from '@/components/layouts/JsonToHtml'
@@ -5,11 +7,41 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import { fixedWindow, request, tokenBucket } from '@arcjet/next'
 import { Heart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import React from 'react'
+
+const aj = arcjet.withRule(
+    detectBot({
+        mode: 'LIVE',
+        allow: ['CATEGORY:SEARCH_ENGINE', 'OPENAI_CRAWLER_SEARCH', 'CATEGORY:PREVIEW']
+    })
+)
+
+function getClient(session: boolean) {
+    if(session) {
+        return aj.withRule(
+            tokenBucket({
+                mode: 'LIVE',
+                capacity: 100,
+                interval: 60,
+                refillRate: 30,
+            })
+        )
+    } else {
+        return aj.withRule(
+            tokenBucket({
+                mode: 'LIVE',
+                capacity: 100,
+                interval: 60,
+                refillRate: 10,
+            })
+        )
+    }
+}
 
 const getJob = async(jobId: string) => {
 
@@ -50,6 +82,15 @@ type Params = Promise<{jobId: string}>
 
 export default async function page({params} : {params: Params}) {
     const {jobId} = await params;
+
+    const session = await auth()
+    const req = await request()
+    const decision = await getClient(!!session)?.protect(req, {requested: 10})
+
+    if(decision.isDenied()) {
+        throw new Error("forbidden")
+    }
+
     const data = await getJob(jobId)
   return (
     <div className='grid lg:grid-cols-3 gap-8 mt-7'>
