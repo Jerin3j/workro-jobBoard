@@ -129,10 +129,7 @@ export default async function page({ params }: { params: Params }) {
               <Badge className="rounded-full">{data.location}</Badge>
             </div>
           </div>
-          {/* <Button variant={'outline'}>
-                    <Heart className='size-4' />
-                    Save Job
-                </Button> */}
+          
 
           {session?.user ? (
             <form
