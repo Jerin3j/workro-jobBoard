@@ -8,10 +8,12 @@ import { cn } from '@/lib/utils';
 
 interface iAppProps {
   field: ControllerRenderProps;
+  disabled?: boolean
 }
-export default function JobListingSelector({ field }: iAppProps) {
+export default function JobListingSelector({ field, disabled }: iAppProps ) {
   return (
     <RadioGroup
+    disabled={disabled}
       value={field.value?.toString()}
       onValueChange={(value) => field.onChange(parseInt(value))}
     >
@@ -25,7 +27,7 @@ export default function JobListingSelector({ field }: iAppProps) {
             />
             <Label
               htmlFor={jobPricing.days.toString()}
-              className="flex flex-col cursor-pointer"
+              className={`flex flex-col ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
             >
               <Card
                 className={cn(

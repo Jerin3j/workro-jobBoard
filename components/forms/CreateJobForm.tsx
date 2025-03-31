@@ -414,7 +414,7 @@ export const CreateJobForm = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <JobListingSelector field={field as any} />
+                      <JobListingSelector field={field as any} disabled={false}/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
