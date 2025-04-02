@@ -31,7 +31,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { UploadDropzone } from '../layouts/UploadWrapper';
 import { XIcon } from 'lucide-react';
-import { createJob, editJobPost } from '@/app/actions';
+import { editJobPost } from '@/app/actions';
 import { IndianCities } from '@/app/utils/IndianCities';
 
 interface iAppProps{

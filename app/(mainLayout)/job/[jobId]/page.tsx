@@ -106,7 +106,7 @@ export default async function page({ params }: { params: Params }) {
 
   const session = await auth();
   const req = await request();
-  const decision = await getClient(!!session)?.protect(req, { requested: 10 });
+  const decision = await getClient(!!session)?.protect(req, { requested: 30 });
 
   if (decision.isDenied()) {
     throw new Error("forbidden");
@@ -118,7 +118,7 @@ export default async function page({ params }: { params: Params }) {
       <div className="space-y-9 col-span-2">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Frontend Developer</h1>
+            <h1 className="text-3xl font-bold">{data.jobTitle}</h1>
             <div className="flex items-center gap-2 mt-2">
               <p className="font-medium">{data.jobTitle}</p>
               <span className="hidden md:inline text-muted-foreground">•</span>

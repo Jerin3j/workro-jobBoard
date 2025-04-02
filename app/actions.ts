@@ -243,3 +243,28 @@ export const editJobPost = async (data: z.infer<typeof jobSchema>, jobId: string
   })
    return redirect('/')
 }
+
+export async function deleteJobPost(jobId: string){
+  const user = await requireUser();
+  const req = await request();
+  const decision = await aj.protect(req);
+
+  if (decision.isDenied()) {
+    throw new Error("Forbidden");
+  }
+
+  await prisma.jobPost.delete({
+    where: {
+      id: jobId,
+      Company: {
+        userId: user.id,
+      },
+    },
+  })
+
+  await inngest.send({
+    name: "job/cancel.expiration",
+    data: {jobId: jobId},
+  });
+  return redirect('/')
+}

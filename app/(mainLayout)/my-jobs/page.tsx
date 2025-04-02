@@ -1,5 +1,6 @@
 import { prisma } from '@/app/utils/db'
 import requireUser from '@/app/utils/requireUser';
+import { CopyLinkMenuItem } from '@/components/layouts/CopyLink';
 import EmptyState from '@/components/layouts/EmptyState';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,7 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
-const getJobs = async(userId: string) => {
+export const getJobs = async(userId: string) => {
     const data = await prisma.jobPost.findMany({
         where: {
             Company: {
@@ -110,12 +111,7 @@ export default async function page() {
                                      Edit Job 
                                      </Link>
                                   </DropdownMenuItem>
-                                  <DropdownMenuItem asChild>
-                                   <Link href={`/my-jobs/${listing.id}/edit`}>
-                                     <CopyCheckIcon/>
-                                     Copy Job Url
-                                     </Link>
-                                  </DropdownMenuItem>
+                                   <CopyLinkMenuItem jobUrl={`${process.env.NEXT_PUBLIC_URL}/job/${listing.id}`}/>
                                   <DropdownMenuSeparator/>
                                   <DropdownMenuItem asChild>
                                    <Link href={`/my-jobs/${listing.id}/delete`}>
