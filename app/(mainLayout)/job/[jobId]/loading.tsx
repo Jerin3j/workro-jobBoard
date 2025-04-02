@@ -50,31 +50,28 @@ export default function loading() {
               <div className="space-y-2">
                 {[...Array(4)].map((itesm, index) => (
                   <div className="flex justify-between">
-                    <Skeleton
-                      key={index}
-                      className="h-3 w-full rounded-full"
-                    />
+                    <Skeleton key={index} className="h-3 w-full rounded-full" />
                   </div>
                 ))}
               </div>
             </div>
           </Card>
           <Card className="p-6">
-          <div className="flex items-center gap-3">
-          <Skeleton className="h-12 w-12" />
-          <div className="flex flex-col space-y-3">
-          <Skeleton className="h-4 w-[150px]" />
-            <div className="space-y-2">
-              <Skeleton className="h-3 w-full" />
-              <Skeleton className="h-3 w-full" />
-              <Skeleton className="h-3 w-full" />
+            <div className="flex items-center gap-3">
+              <Skeleton className="h-12 w-12" />
+              <div className="flex flex-col space-y-3">
+                <Skeleton className="h-4 w-[150px]" />
+                <div className="space-y-2">
+                  <Skeleton className="h-3 w-full" />
+                  <Skeleton className="h-3 w-full" />
+                  <Skeleton className="h-3 w-full" />
+                </div>
+                <div className="flex items-center justify-left ml-3 gap-6">
+                  <Skeleton className="h-4 w-[90px]" />
+                  <Skeleton className="h-4 w-[90px]" />
+                </div>
+              </div>
             </div>
-            <div className="flex items-center justify-left ml-3 gap-6">
-            <Skeleton className="h-4 w-[90px]" />
-            <Skeleton className="h-4 w-[90px]" />
-            </div>
-          </div>
-          </div>
           </Card>
         </div>
       </div>
