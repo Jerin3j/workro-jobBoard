@@ -5,7 +5,7 @@ import React from "react";
 export default function JobListingLoading() {
   return (
     <div className="flex flex-col gap-6">
-      {[...Array(10)].map((item, index) => (
+      {[...Array(4)].map((item, index) => (
         <Card key={index} className="p-6">
           <div className="flex items-center gap-4">
             <Skeleton className="size-14 rounded" />
