@@ -32,23 +32,29 @@ export default function MainPagination({ currentPage, totalPages }: iAppProps) {
       for (let i = 1; i <= totalPages; i++) {
         items.push(i);
       }
-    }else {
-      if (currentPage <= 3) {
-        for (let i = 1; i <= totalPages; i++) {
-          items.push(i);
-        }
-        items.push(null);
-        items.push(totalPages);
-      } else {
-        items.push(1)
-        items.push(null);
-        items.push(currentPage - 1 );
-        items.push(currentPage);
-        items.push(currentPage + 1 );
-        items.push(null);
-        items.push(totalPages);
+  } else {
+    if (currentPage <= 3) {
+      for (let i = 1; i <= 5; i++) {
+        items.push(i);
       }
-  };
+      items.push(null);
+      items.push(totalPages);
+    } else if (currentPage > totalPages - 3) {
+      items.push(1);
+      items.push(null);
+      for (let i = totalPages - 4; i <= totalPages; i++) {
+        items.push(i);
+      }
+    } else {
+      items.push(1);
+      items.push(null);
+      items.push(currentPage - 1);
+      items.push(currentPage);
+      items.push(currentPage + 1);
+      items.push(null);
+      items.push(totalPages);
+    }
+  }
   return items;
 }
   return (
@@ -66,12 +72,12 @@ export default function MainPagination({ currentPage, totalPages }: iAppProps) {
         </PaginationItem>
         {generatePainationItems().map((page, index)=>(
           page === null ? (
-        <PaginationItem>
+        <PaginationItem key={`ellipsis-${index}`}>
           <PaginationEllipsis />
         </PaginationItem>
           ) :
           <PaginationItem
-          key={index}
+          key={`page-${page}`}
          
         >
          <PaginationLink
