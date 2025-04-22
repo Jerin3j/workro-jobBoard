@@ -1,7 +1,6 @@
 import JobFilter from "@/components/layouts/JobFilters";
 import JobListings from "@/components/layouts/JobListings";
 import JobListingLoading from "@/components/layouts/loadings/JobListingLoading";
-import { Card } from "@/components/ui/card";
 import { Suspense } from "react";
 
 type SearchParams = {
@@ -16,12 +15,14 @@ export default async function Home({searchParams}: SearchParams) {
   const currentPage = Number(params.page) || 1;
   const jobTypes = params?.jobTypes?.split(",") || [];
   const jobLocation = params.location || ""
+  
+  const filterKey = `page=${currentPage};types=${jobTypes.join(",")};location=${jobLocation}`;
   return (
     <div className="grid grid-cols-3 gap-8">
         <JobFilter/>
 
       <div className="col-span-2 flex flex-col gap-6">
-        <Suspense fallback={<JobListingLoading/>} key={currentPage}>
+        <Suspense fallback={<JobListingLoading/>} key={filterKey}>
           <JobListings currentPage={currentPage} jobTypes={jobTypes} jobLocation={jobLocation}/>
         </Suspense>
       </div>
