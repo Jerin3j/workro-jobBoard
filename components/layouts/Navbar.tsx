@@ -1,10 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { Button, buttonVariants } from '../ui/button'
+import { buttonVariants } from '../ui/button'
 import { ThemeToggle } from './ButtonToggle'
-import { auth, signOut } from '@/app/utils/auth'
-import { redirect } from 'next/navigation'
+import { auth } from '@/app/utils/auth'
 import { UserDropdown } from './UserDropdown'
 
 export const Navbar = async() => {
