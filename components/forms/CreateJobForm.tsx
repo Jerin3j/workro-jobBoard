@@ -30,7 +30,7 @@ import JobDescriptionEditor from "../RichTextEditor.tsx/JobDescriptionEditor";
 import BenefitsSelector from "../layouts/BenefitsSelector";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Key, XIcon } from "lucide-react";
+import { XIcon } from "lucide-react";
 import { UploadDropzone } from "../layouts/UploadWrapper";
 import JobListingSelector from "../layouts/JobListingSelector";
 import { createJob } from "@/app/actions";
