@@ -1,6 +1,4 @@
 import requireUser from "@/app/utils/requireUser";
-import { CopyLinkMenuItem } from "@/components/layouts/CopyLink";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,14 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
@@ -25,9 +15,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal, PenIcon, XCircle } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { getJobs } from "./page";
 

@@ -124,7 +124,7 @@ export default async function PostJobPage (){
                     <div className='space-y-4'>
                         {testimonials.map((testimonial, index)=> (
                             <blockquote key={index} className='border-l-2 border-primary pl-4'>
-                                <p className='text-sm text-muted-foreground italic'>"{testimonial.quote}"</p>
+                                <p className='text-sm text-muted-foreground italic'>&quot;{testimonial.quote}&quot;</p>
                                 <footer className='mt-2 text-sm font-medium'> - {testimonial.author}, {testimonial.company}</footer>
                             </blockquote>
                         ))}

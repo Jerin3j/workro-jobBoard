@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { fixedWindow, request, tokenBucket } from "@arcjet/next";
+import { request, tokenBucket } from "@arcjet/next";
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

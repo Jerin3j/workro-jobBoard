@@ -49,8 +49,8 @@ export default function loading() {
               <Skeleton className="h-5 w-[150px]" />
               <div className="space-y-2">
                 {[...Array(4)].map((itesm, index) => (
-                  <div className="flex justify-between">
-                    <Skeleton key={index} className="h-3 w-full rounded-full" />
+                  <div key={index} className="flex justify-between">
+                    <Skeleton className="h-3 w-full rounded-full" />
                   </div>
                 ))}
               </div>

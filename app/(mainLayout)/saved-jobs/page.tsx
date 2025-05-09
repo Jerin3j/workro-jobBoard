@@ -1,9 +1,7 @@
-import { auth } from '@/app/utils/auth';
 import { prisma } from '@/app/utils/db'
 import requireUser from '@/app/utils/requireUser';
 import EmptyState from '@/components/layouts/EmptyState';
 import JobCard from '@/components/layouts/JobCard';
-import { resolve } from 'path';
 import React from 'react'
 
 export const getSavedJobs = async(userId: string)=> {
