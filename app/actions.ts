@@ -5,7 +5,7 @@ import { prisma } from "./utils/db";
 import requireUser from "./utils/requireUser";
 import { companyScema, jobSchema } from "./utils/zodSchemas";
 import { userSchema } from "./utils/zodSchemas";
-import { date, z } from "zod";
+import { z } from "zod";
 import arcjet, { detectBot, shield } from "./utils/arcjet";
 import { request } from "@arcjet/next";
 import Razorpay from "razorpay";
