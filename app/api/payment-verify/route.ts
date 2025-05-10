@@ -57,7 +57,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const updatedJob = await prisma.jobPost.update({
+    await prisma.jobPost.update({
       where: { id: jobId },
       data: { status: "ACTIVE" },
     });

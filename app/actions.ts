@@ -136,10 +136,12 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
 
       await prisma.user.update({
         where: { id: session.id },
-        data: { razorpayCustomerId: customer.id },
+        data: { razorpayCustomerId: razorpayCustomerId },
       });
     } catch (error) {
+      console.log(error);
       throw new Error("Failed to create Razorpay customer");
+      
     }
 
     const jobPost = await prisma.jobPost.create({

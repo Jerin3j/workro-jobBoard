@@ -1,15 +1,15 @@
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
-import { getSavedJobs } from "./page";
 import requireUser from "@/app/utils/requireUser";
+import { getSavedJobs } from "@/app/utils/getSavedJobs";
 
 export default async function loading() {
   const session = await requireUser();
   const savedJob = await getSavedJobs(session?.id as string);
   return (
     <div className="grid grid-cols-1 mt-5 gap-4">
-      {savedJob.map((items, id) => (
+      {savedJob.map((_, id) => (
         <Card key={id} className="p-6">
           <div className="flex items-center gap-4">
             <Skeleton className="size-14 rounded" />

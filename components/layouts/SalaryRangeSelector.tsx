@@ -11,7 +11,7 @@ interface SalaryRangeProps {
     currency: string;
 }
 
-export const SalaryRangeSelector = ({control, currency, maxSalary, minSalary, step} : SalaryRangeProps) => {
+export const SalaryRangeSelector = ({control, maxSalary, minSalary} : SalaryRangeProps) => {
 
     const { field: fromFiled} = useController({
         name: 'salaryFrom',

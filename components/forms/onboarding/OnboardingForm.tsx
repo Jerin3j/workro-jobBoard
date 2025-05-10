@@ -24,7 +24,7 @@ export const OnboardingForm = () => {
       case 2:
         return UserSelection === "company" ? <CompanyForm /> : <UserForm />;
       default:
-        null;
+        console.warn("Invalid step");
     }
   };
 

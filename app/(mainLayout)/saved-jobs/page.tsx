@@ -1,60 +1,44 @@
-import { prisma } from '@/app/utils/db'
+import { getSavedJobs } from '@/app/utils/getSavedJobs';
 import requireUser from '@/app/utils/requireUser';
 import EmptyState from '@/components/layouts/EmptyState';
 import JobCard from '@/components/layouts/JobCard';
-import React from 'react'
-
-export const getSavedJobs = async(userId: string)=> {
-
-   const data =  await prisma.savedJobPost.findMany({
-        where: {
-            userId: userId
-        },
-        select: {
-            JobPost: {
-                select: {
-                    id: true,
-                    jobTitle: true,
-                    salaryFrom: true,
-                    salaryTo: true,
-                    location: true,
-                    employmentType: true,
-                    createdAt: true,
-                    Company: {
-                      select: {
-                        name: true,
-                        logo: true,
-                        location: true,
-                        about: true,
-                        website: true,
-                        LinkedinAccount: true,
-                      },
-                    },
-                  },
-            }
-        }
-    })
-    return data;
-}
+import React from 'react';
 
 export default async function SavedJobsPage() {
+  const session = await requireUser();
 
-    const session = await requireUser()
-    const data = await getSavedJobs(session?.id as string)
-    await new Promise((resolve)=> setTimeout(resolve, 2000))
+  if (!session?.id) {
+    return (
+      <EmptyState
+        title="Not authenticated"
+        description="Please log in to see your saved jobs."
+        buttonText="Login"
+        href="/login"
+      />
+    );
+  }
 
-    if(data.length === 0) {
-        return (
-            <EmptyState 
-            title='No saved jobs found' description="You don't have saved jobs yet." buttonText="Find a job" href='/'
-             />
-        )
-    }
+  const data = await getSavedJobs(session.id);
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  if (data.length === 0) {
+    return (
+      <EmptyState
+        title="No saved jobs found"
+        description="You don't have saved jobs yet."
+        buttonText="Find a job"
+        href="/"
+      />
+    );
+  }
+
   return (
-    <div className='grid grid-cols-1 mt-5 gap-4'>
-        {data.map((favorite) => (
-            <JobCard job={favorite.JobPost} key={favorite.JobPost.id}/>
-        ))}
+    <div className="grid grid-cols-1 mt-5 gap-4">
+      {data.map((favorite) => (
+        favorite.JobPost && (
+          <JobCard job={favorite.JobPost} key={favorite.JobPost.id} />
+        )
+      ))}
     </div>
-  )
+  );
 }
