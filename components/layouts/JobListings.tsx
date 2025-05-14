@@ -10,7 +10,7 @@ const getData = async ({
   jobTypes = [],
   jobLocation = "",
 }: {
-  page: number;
+  page: number; 
   pageSize: number;
   jobTypes: string[];
   jobLocation: string;
@@ -88,7 +88,7 @@ export default async function JobListings({
   return (
     <>
       {jobs.length !== 0 ? (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4 lg:gap-6">
           {jobs.map((job) => (
             <JobCard key={job.id} job={job} />
           ))}

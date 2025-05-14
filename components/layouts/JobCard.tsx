@@ -30,10 +30,10 @@ export default function JobCard({job}: iAppProps) {
    <Link href={`/job/${job.id}`}>
     <Card className='hover:border-primary hover:shadow-lg transition-all duration-300'>
         <CardHeader>
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex gap-4">
                 <Image src={job.Company.logo} alt={job.Company.name} width={48} height={48} className='size-12 rounded-lg'/>
                 <div>
-                    <h1 className="text-xl md:text-2xl font-bold">{job.jobTitle}</h1>
+                    <h1 className="text-lg sm:text-xl md:text-2xl font-bold">{job.jobTitle}</h1>
                     <div className="flex flex-wrap items-center gap-2">
                         <p className="text-sm text-muted-foreground">{job.Company.name}</p>
                         <span className="hidden md:inline  font-bold text-muted-foreground">•</span>
@@ -41,7 +41,7 @@ export default function JobCard({job}: iAppProps) {
                             {job.employmentType}
                         </Badge>
                         <span className="hidden md:inline text-muted-foreground">•</span>
-                        <Badge className='rounded-xl' variant={"outline"}>
+                        <Badge className='rounded-xl hidden md:block' variant={"outline"}>
                           📍{job.location}
                         </Badge>
                         <span className="hidden md:inline text-muted-foreground">•</span>
@@ -52,16 +52,16 @@ export default function JobCard({job}: iAppProps) {
                     </div>
                 </div>
                 <div className="md:ml-auto text-right">
-                    <div className='flex items-center gap-2 justify-end'>
-                        <MapPin className='size-2 lg:size-4'/>
-                        <h1 className="text-xs lg:text-md line-clamp-1">{job.location}</h1>
+                    <div className='hidden md:flex items-center gap-2 justify-end h-fit'>
+                        <MapPin className='size-2 md:size-4'/>
+                        <h1 className="text-xs md:text-md truncate md:line-clamp-1">{job.location}</h1>
                     </div>
 
-                    <p className="text-xs md:text-sm text-muted-foreground md:text-right">{FormatRelativeTime(job.createdAt)}</p>
+                    <p className="hidde md:flex text-xs md:text-sm text-muted-foreground md:text-right">{FormatRelativeTime(job.createdAt)}</p>
                 </div>
             </div>
 
-            <p className="text-base text-muted-foreground line-clamp-2 !mt-5">
+            <p className="text-base text-muted-foreground line-clamp-2 mt-2 lg:!mt-5">
                 {job.Company.about}
             </p>
         </CardHeader>

@@ -18,7 +18,7 @@ export default async function Home({searchParams}: SearchParams) {
   
   const filterKey = `page=${currentPage};types=${jobTypes.join(",")};location=${jobLocation}`;
   return (
-    <div className="grid grid-cols-3 gap-8">
+    <div className="flex flex-col gap-3 md:grid md:grid-cols-3 lg:gap-8 w-full">
         <JobFilter/>
 
       <div className="col-span-2 flex flex-col gap-6">

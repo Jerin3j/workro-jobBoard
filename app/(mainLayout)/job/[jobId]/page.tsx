@@ -106,7 +106,7 @@ export default async function page({ params }: { params: Params }) {
 
   const session = await auth();
   const req = await request();
-  const decision = await getClient(!!session)?.protect(req, { requested: 30 });
+  const decision = await getClient(!!session)?.protect(req, { requested: 0 });
 
   if (decision.isDenied()) {
     throw new Error("forbidden");
@@ -114,7 +114,7 @@ export default async function page({ params }: { params: Params }) {
 
   const { jobData: data, savedJob } = await getJob(jobId, session?.user?.id);
   return (
-    <div className="grid lg:grid-cols-3 gap-8 mt-7">
+    <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8 mt-7 ">
       <div className="space-y-9 col-span-2">
         <div className="flex items-center justify-between">
           <div>
@@ -129,7 +129,6 @@ export default async function page({ params }: { params: Params }) {
               <Badge className="rounded-full">{data.location}</Badge>
             </div>
           </div>
-          
 
           {session?.user ? (
             <form
@@ -144,7 +143,9 @@ export default async function page({ params }: { params: Params }) {
           ) : (
             <Link
               href={"/login"}
-              className={buttonVariants({ variant: "outline" })}
+              className={`${buttonVariants({
+                variant: "outline",
+              })} self-start lg:self-center`}
             >
               <Heart className="size-4" />
               Save Job
@@ -254,11 +255,11 @@ export default async function page({ params }: { params: Params }) {
               height={48}
               className="rounded-full size-12"
             />
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2 lg:gap-0">
               <h3 className="font-semibold truncate">
                 {data.Company.name} | {data.Company.location}
               </h3>
-              <p className="text-sm text-muted-foreground line-clamp-3">
+              <p className="text-sm text-muted-foreground line-clamp-2 lg:line-clamp-3">
                 {data.Company.about}
               </p>
               <div className="flex items-center justify-left ml-3 gap-6">

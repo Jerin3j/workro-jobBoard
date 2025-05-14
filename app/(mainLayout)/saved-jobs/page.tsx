@@ -1,8 +1,8 @@
-import { getSavedJobs } from '@/app/utils/getSavedJobs';
-import requireUser from '@/app/utils/requireUser';
-import EmptyState from '@/components/layouts/EmptyState';
-import JobCard from '@/components/layouts/JobCard';
-import React from 'react';
+import { getSavedJobs } from "@/app/utils/getSavedJobs";
+import requireUser from "@/app/utils/requireUser";
+import EmptyState from "@/components/layouts/EmptyState";
+import JobCard from "@/components/layouts/JobCard";
+import React from "react";
 
 export default async function SavedJobsPage() {
   const session = await requireUser();
@@ -20,7 +20,6 @@ export default async function SavedJobsPage() {
 
   const data = await getSavedJobs(session.id);
   await new Promise((resolve) => setTimeout(resolve, 2000));
-
   if (data.length === 0) {
     return (
       <EmptyState
@@ -34,11 +33,12 @@ export default async function SavedJobsPage() {
 
   return (
     <div className="grid grid-cols-1 mt-5 gap-4">
-      {data.map((favorite) => (
-        favorite.JobPost && (
-          <JobCard job={favorite.JobPost} key={favorite.JobPost.id} />
-        )
-      ))}
+      {data.map(
+        (favorite) =>
+          favorite.JobPost && (
+            <JobCard job={favorite.JobPost} key={favorite.JobPost.id} />
+          )
+      )}
     </div>
   );
 }

@@ -64,9 +64,18 @@ export default function JobFilters() {
   const handleLocationChange = (location: string) => {
     router.push(`?${createQueryString("location", location)}`);
   };
+
+  const handleJobTypeChangeSelect = (jobType: string) => {
+    const current = new Set(currentJobTypes);
+    current.add(jobType);
+    const newValue = Array.from(current).join(",");
+
+    router.push(`?${createQueryString("jobTypes", newValue)}`);
+  };
   return (
-    <Card className="col-span-1 h-fit">
-      <CardHeader className="flex flex-row justify-between items-center">
+    <Card className="w-full lg:col-span-1 lg:h-fit">
+      {/* for large devices */}
+      <CardHeader className="hidden lg:flex flex-row justify-between items-center">
         <CardTitle className="text-2xl font-semibold">Filters</CardTitle>
         <Button
           onClick={clearAllFilters}
@@ -78,9 +87,9 @@ export default function JobFilters() {
           <XIcon className="size-4" />
         </Button>
       </CardHeader>
-      <Separator />
+      <Separator className="hidden lg:block" />
 
-      <CardContent className="space-y-6">
+      <CardContent className="hidden lg:block space-y-6">
         <div className="space-y-4">
           <Label className="text-lg font-semibold">Job Type</Label>
           <div className="grid grid-cols-2 gap-4">
@@ -131,6 +140,65 @@ export default function JobFilters() {
             </SelectContent>
           </Select>
         </div>
+      </CardContent>
+
+      {/* for small devices */}
+      <CardContent className="flex items-center h-3 justify-between lg:hidden">
+        <Select
+          onValueChange={(job) => {
+            handleJobTypeChangeSelect(job);
+          }}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Select Job Type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Job Type</SelectLabel>
+              {JobTypes.map((job) => (
+                <SelectItem key={job} value={job}>
+                  <span className="pl-2">{job}</span>
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
+        <Select
+          onValueChange={(value) => {
+            handleLocationChange(value);
+          }}
+          value={currentLocation}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Select Location" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Worldwide</SelectLabel>
+              <SelectItem value="worldwide">
+                <span>🌍</span> <span className="pl-2">Worldwide / Remote</span>
+              </SelectItem>
+            </SelectGroup>
+            <SelectGroup>
+              <SelectLabel>Location</SelectLabel>
+              {indianCities.map((city) => (
+                <SelectItem key={city} value={city}>
+                  <span className="pl-2">{city}</span>
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <Button
+          onClick={clearAllFilters}
+          variant={"destructive"}
+          size={"sm"}
+          className="h-8"
+        >
+          {/* <span>Clear</span> */}
+          <XIcon className="size-4" />
+        </Button>
       </CardContent>
     </Card>
   );
