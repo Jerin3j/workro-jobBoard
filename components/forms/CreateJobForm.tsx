@@ -96,6 +96,8 @@ export const CreateJobForm = ({
       setPending(true);
       const jobPost = await createJob(data);
       const jobId = jobPost?.id;
+      console.log("Job post ", jobPost)
+      console.log("Job id id ", jobId)
 
       if (!jobId) {
         throw new Error(" Job ID is undefined");
