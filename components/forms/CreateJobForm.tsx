@@ -96,7 +96,7 @@ export const CreateJobForm = ({
       setPending(true);
       const jobPost = await createJob(data);
       const jobId = jobPost?.id;
-      console.log("Job post data", data)
+      console.log("Job post data", data )
 
       console.log("Job post ", jobPost)
       console.log("Job id id ", jobId)
