@@ -141,7 +141,6 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
     } catch (error) {
       console.log(error);
       throw new Error("Failed to create Razorpay customer");
-      
     }
 
     const jobPost = await prisma.jobPost.create({
@@ -159,14 +158,20 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
       select: { id: true },
     });
 
+    console.log("JobPost ID:", jobPost.id);
+
     //inngest setting
-    await inngest.send({
-      name: "job/created",
-      data: {
-        jobId: jobPost.id,
-        expirationDays: validateData.listingDuration,
-      },
-    });
+try {
+  await inngest.send({
+    name: "job/created",
+    data: {
+      jobId: jobPost.id,
+      expirationDays: validateData.listingDuration,
+    },
+  });
+} catch (err) {
+  console.error("Inngest error (will not block job creation):", err);
+}
 
     return jobPost;
   } catch (error) {
@@ -213,8 +218,10 @@ export const unSaveJobPost = async (savedJobPostId: string) => {
   revalidatePath(`/job/${data.jobPostId}`);
 };
 
-
-export const editJobPost = async (data: z.infer<typeof jobSchema>, jobId: string) => {
+export const editJobPost = async (
+  data: z.infer<typeof jobSchema>,
+  jobId: string
+) => {
   const user = await requireUser();
   const req = await request();
   const decision = await aj.protect(req);
@@ -226,27 +233,27 @@ export const editJobPost = async (data: z.infer<typeof jobSchema>, jobId: string
   const validateData = jobSchema.parse(data);
 
   await prisma.jobPost.update({
-   where: {
-    id: jobId,
+    where: {
+      id: jobId,
       Company: {
-        userId: user.id
-      }
-   },
-   data: {
-    jobTitle: validateData.jobTitle,
-    jobDescription: validateData.jobDescription,
-    benefits: validateData.benefits,
-    employmentType: validateData.employmentType,
-    location: validateData.location,
-    salaryFrom: validateData.salaryFrom,
-    salaryTo: validateData.salaryTo,
-    listingDuration: validateData.listingDuration,
-   }
-  })
-   return redirect('/')
-}
+        userId: user.id,
+      },
+    },
+    data: {
+      jobTitle: validateData.jobTitle,
+      jobDescription: validateData.jobDescription,
+      benefits: validateData.benefits,
+      employmentType: validateData.employmentType,
+      location: validateData.location,
+      salaryFrom: validateData.salaryFrom,
+      salaryTo: validateData.salaryTo,
+      listingDuration: validateData.listingDuration,
+    },
+  });
+  return redirect("/");
+};
 
-export async function deleteJobPost(jobId: string){
+export async function deleteJobPost(jobId: string) {
   const user = await requireUser();
   const req = await request();
   const decision = await aj.protect(req);
@@ -262,11 +269,11 @@ export async function deleteJobPost(jobId: string){
         userId: user.id,
       },
     },
-  })
+  });
 
   await inngest.send({
     name: "job/cancel.expiration",
-    data: {jobId: jobId},
+    data: { jobId: jobId },
   });
-  return redirect('/')
+  return redirect("/");
 }
