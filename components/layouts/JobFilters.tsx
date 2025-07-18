@@ -123,10 +123,10 @@ export default function JobFilters() {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectLabel>Worldwide</SelectLabel>
-                <SelectItem value="worldwide">
+                <SelectLabel>Remote</SelectLabel>
+                <SelectItem value="remote">
                   <span>🌍</span>{" "}
-                  <span className="pl-2">Worldwide / Remote</span>
+                  <span className="pl-2">Remote / Worldwide</span>
                 </SelectItem>
               </SelectGroup>
               <SelectGroup>

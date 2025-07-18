@@ -2,7 +2,14 @@ import { createJobSeeker } from "@/app/actions";
 import { userSchema } from "@/app/utils/zodSchemas";
 import { UploadDropzone } from "@/components/layouts/UploadWrapper";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -64,7 +71,11 @@ export const UserForm = () => {
             <FormItem>
               <FormLabel>Short Bio*</FormLabel>
               <FormControl>
-                <Textarea placeholder="Tell us about yourself" {...field} />
+                <Textarea
+                  className="field-sizing-fixed"
+                  placeholder="Tell us about yourself"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

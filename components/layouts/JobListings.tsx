@@ -79,12 +79,10 @@ export default async function JobListings({
 }) {
   const { jobs, totalPages } = await getData({
     page: currentPage,
-    pageSize: 2,
+    pageSize: 4,
     jobTypes,
     jobLocation: jobLocation,
   });
-  console.log(jobs.length);
-
   return (
     <>
       {jobs.length !== 0 ? (

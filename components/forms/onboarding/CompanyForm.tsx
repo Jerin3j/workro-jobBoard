@@ -1,25 +1,41 @@
-import React, { useState } from 'react'
-import { z } from 'zod';
-import Image from 'next/image';
-import { useForm } from 'react-hook-form'
-import { XIcon } from 'lucide-react';
+import React, { useState } from "react";
+import { z } from "zod";
+import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { XIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { companyScema } from '@/app/utils/zodSchemas';
-import { createCompany } from '@/app/actions';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { UploadDropzone } from '@/components/layouts/UploadWrapper';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { IndianCities } from '@/app/utils/IndianCities';
+import { companyScema } from "@/app/utils/zodSchemas";
+import { createCompany } from "@/app/actions";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { UploadDropzone } from "@/components/layouts/UploadWrapper";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { IndianCities } from "@/app/utils/IndianCities";
 
 export const CompanyForm = () => {
   const [pending, setPending] = useState(false);
 
-    //array of objs into flat array
-    const indianCities = Object.entries(IndianCities).flatMap(([key, values])=> values.map((value)=> `${key}, ${value}`))
-  
+  //array of objs into flat array
+  const indianCities = Object.entries(IndianCities).flatMap(([key, values]) =>
+    values.map((value) => `${key}, ${value}`)
+  );
 
   const form = useForm({
     resolver: zodResolver(companyScema),
@@ -80,9 +96,9 @@ export const CompanyForm = () => {
                   </FormControl>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>worldwide</SelectLabel>
-                      <SelectItem value="worldwide">
-                        <span>🌍</span> <span>Worldwide / Remote</span>
+                      <SelectLabel>Remote</SelectLabel>
+                      <SelectItem value="remote">
+                        <span>🌍</span> <span>Remote / Worldwide</span>
                       </SelectItem>
                     </SelectGroup>
                     <SelectGroup>
@@ -139,6 +155,7 @@ export const CompanyForm = () => {
               <FormLabel>About*</FormLabel>
               <FormControl>
                 <Textarea
+                  className="field-sizing-fixed"
                   placeholder="tell us about your company..."
                   {...field}
                 />

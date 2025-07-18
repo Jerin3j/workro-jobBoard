@@ -8,22 +8,23 @@ generator client {
 }
 
 model User {
-  id                  String          @id @default(auto()) @map("_id") @db.ObjectId
+  id                  String           @id @default(auto()) @map("_id") @db.ObjectId
   name                String?
-  email               String?         @unique
+  email               String?          @unique
   emailVerified       DateTime?
   image               String?
   accounts            Account[]
   sessions            Session[]
   company             Company?
   JobSeeker           JobSeeker?
-  razorpayCustomerId  String?         @unique
+  razorpayCustomerId  String?          @unique
   userType            userType?
-  onBoardingCompleted Boolean         @default(false)
+  onBoardingCompleted Boolean          @default(false)
   Authenticator       Authenticator[]
-  createdAt           DateTime        @default(now())
-  updatedAt           DateTime        @updatedAt
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
   SavedJobPost        SavedJobPost[]
+  AppliedJobPost      AppliedJobPost[]
 }
 
 enum userType {
@@ -116,7 +117,7 @@ model Authenticator {
 }
 
 model JobPost {
-  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  id              String           @id @default(auto()) @map("_id") @db.ObjectId
   jobTitle        String
   employmentType  String
   location        String
@@ -125,12 +126,13 @@ model JobPost {
   jobDescription  String
   listingDuration Int
   benefits        String[]
-  status          JobPostStatus  @default(DRAFT)
-  Company         Company        @relation(fields: [companyId], references: [id])
-  companyId       String         @db.ObjectId()
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
+  status          JobPostStatus    @default(DRAFT)
+  Company         Company          @relation(fields: [companyId], references: [id])
+  companyId       String           @db.ObjectId()
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
   SavedJobPost    SavedJobPost[]
+  AppliedJobPost  AppliedJobPost[]
 }
 
 enum JobPostStatus {
@@ -140,6 +142,18 @@ enum JobPostStatus {
 }
 
 model SavedJobPost {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  JobPost   JobPost  @relation(fields: [jobPostId], references: [id])
+  jobPostId String   @unique @db.ObjectId
+  User      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, jobPostId])
+}
+
+model AppliedJobPost {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   JobPost   JobPost  @relation(fields: [jobPostId], references: [id])
   jobPostId String   @unique @db.ObjectId

@@ -1,53 +1,75 @@
-import { prisma } from '@/app/utils/db'
-import requireUser from '@/app/utils/requireUser';
-import { CopyLinkMenuItem } from '@/components/layouts/CopyLink';
-import EmptyState from '@/components/layouts/EmptyState';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { MoreHorizontal, PenIcon, XCircle } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
+import { prisma } from "@/app/utils/db";
+import requireUser from "@/app/utils/requireUser";
+import { CopyLinkMenuItem } from "@/components/layouts/CopyLink";
+import EmptyState from "@/components/layouts/EmptyState";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { MoreHorizontal, PenIcon, XCircle } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-export const getJobs = async(userId: string) => {
-    const data = await prisma.jobPost.findMany({
-        where: {
-            Company: {
-                userId: userId,
-            },
-        },
+export const getJobs = async (userId: string) => {
+  const data = await prisma.jobPost.findMany({
+    where: {
+      Company: {
+        userId: userId,
+      },
+    },
+    select: {
+      id: true,
+      jobTitle: true,
+      status: true,
+      createdAt: true,
+      Company: {
         select: {
-            id:true,
-            jobTitle: true,
-            status: true,
-            createdAt: true,
-            Company: {
-                select: {
-                    name: true,
-                    logo: true,
-                }
-            },
+          name: true,
+          logo: true,
         },
-        orderBy: {
-            createdAt: 'desc',
-        }
-    })
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
-    return data;
-}
+  return data;
+};
 
 export default async function page() {
-    const session = await requireUser();
-    const data = await getJobs(session.id as string);
+  const session = await requireUser();
+  const data = await getJobs(session.id as string);
   return (
     <>
       {data.length === 0 ? (
         <EmptyState
           title="No job posts found"
           description="You dont have any job posts yet."
-          buttonText="Create a job post now!"
+          {...(session.userType == "COMPANY" && {
+            buttonText: "Create a job post now!",
+          })}
           href="/post-job"
         />
       ) : (
@@ -67,7 +89,7 @@ export default async function page() {
                   <TableHead>Job Title</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Created at</TableHead>
-                  <TableHead className='text-right'>Actions</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -95,34 +117,36 @@ export default async function page() {
                         year: "numeric",
                       })}
                     </TableCell>
-                    <TableCell className='text-right'>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant={'ghost'} size={'icon'}>
-                                    <MoreHorizontal/>
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align='end' className='px-3'>
-                                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                <DropdownMenu>
-                                  <DropdownMenuItem asChild>
-                                   <Link href={`/my-jobs/${listing.id}/edit`}>
-                                     <PenIcon/>
-                                     Edit Job 
-                                     </Link>
-                                  </DropdownMenuItem>
-                                   <CopyLinkMenuItem jobUrl={`${process.env.NEXT_PUBLIC_URL}/job/${listing.id}`}/>
-                                  <DropdownMenuSeparator/>
-                                  <DropdownMenuItem asChild>
-                                   <Link href={`/my-jobs/${listing.id}/delete`}>
-                                     <XCircle/>
-                                     Delete Job
-                                     </Link>
-                                  </DropdownMenuItem>
-                                </DropdownMenu>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                        </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant={"ghost"} size={"icon"}>
+                            <MoreHorizontal />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="px-3">
+                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                          <DropdownMenu>
+                            <DropdownMenuItem asChild>
+                              <Link href={`/my-jobs/${listing.id}/edit`}>
+                                <PenIcon />
+                                Edit Job
+                              </Link>
+                            </DropdownMenuItem>
+                            <CopyLinkMenuItem
+                              jobUrl={`${process.env.NEXT_PUBLIC_URL}/job/${listing.id}`}
+                            />
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem asChild>
+                              <Link href={`/my-jobs/${listing.id}/delete`}>
+                                <XCircle />
+                                Delete Job
+                              </Link>
+                            </DropdownMenuItem>
+                          </DropdownMenu>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

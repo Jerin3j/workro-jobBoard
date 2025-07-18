@@ -14,14 +14,14 @@ import { ChevronDown, Heart, Layers2, LogOut } from "lucide-react";
 import Link from "next/link";
 import { signOut } from "@/app/utils/auth";
 
-
 interface UserProps {
   email: string;
   name: string;
   image: string;
+  userType: string;
 }
 
-export const UserDropdown = ({ email, image, name }: UserProps) => {
+export const UserDropdown = ({ email, image, name, userType }: UserProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -33,7 +33,7 @@ export const UserDropdown = ({ email, image, name }: UserProps) => {
           <ChevronDown size={16} strokeWidth={2} className="ml-2 opacity-60" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="w-52">
         <DropdownMenuLabel className="flex flex-col">
           <span className="text-sm font-medium text-foreground">{name}</span>
           <span className="text-xs lowercase text-muted-foreground">
@@ -48,12 +48,21 @@ export const UserDropdown = ({ email, image, name }: UserProps) => {
               <span>Saved Jobs</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href={"/my-jobs"}>
-              <Layers2 size={16} strokeWidth={2} className="opacity-60" />
-              <span>My Jobs Listings</span>
-            </Link>
-          </DropdownMenuItem>
+          {userType === "COMPANY" ? (
+            <DropdownMenuItem asChild>
+              <Link href={"/my-jobs"}>
+                <Layers2 size={16} strokeWidth={2} className="opacity-60" />
+                <span>My Jobs Listings</span>
+              </Link>
+            </DropdownMenuItem>
+          ) : (
+            <DropdownMenuItem asChild>
+              <Link href={"/applied-jobs"}>
+                <Layers2 size={16} strokeWidth={2} className="opacity-60" />
+                <span>My Applied Listings</span>
+              </Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
@@ -69,6 +78,7 @@ export const UserDropdown = ({ email, image, name }: UserProps) => {
             </button>
           </form>
         </DropdownMenuItem>
+        <p></p>
       </DropdownMenuContent>
     </DropdownMenu>
   );

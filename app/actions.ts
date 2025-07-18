@@ -129,7 +129,6 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
       });
 
       razorpayCustomerId = customer.id;
-
       await prisma.user.findUnique({
         where: { id: session.id },
       });
@@ -157,8 +156,6 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
       },
       select: { id: true },
     });
-
-    console.log("JobPost ID:", jobPost.id);
 
     //inngest setting
 try {

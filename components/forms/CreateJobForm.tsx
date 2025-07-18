@@ -96,10 +96,6 @@ export const CreateJobForm = ({
       setPending(true);
       const jobPost = await createJob(data);
       const jobId = jobPost?.id;
-      console.log("Job post data", data )
-
-      console.log("Job post ", jobPost)
-      console.log("Job id id ", jobId)
 
       if (!jobId) {
         throw new Error(" Job ID is undefined");
@@ -136,7 +132,7 @@ export const CreateJobForm = ({
                     <FormItem>
                       <FormLabel>Job Name*</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter company name" {...field} />
+                        <Input placeholder="Enter Job Name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -193,10 +189,10 @@ export const CreateJobForm = ({
                         </FormControl>
                         <SelectContent>
                           <SelectGroup>
-                            <SelectLabel>Worldwide</SelectLabel>
-                            <SelectItem value="worldwide">
+                            <SelectLabel>Remote</SelectLabel>
+                            <SelectItem value="remote">
                               <span>🌍</span>{" "}
-                              <span className="pl-2">Worldwide / Remote</span>
+                              <span className="pl-2">Remote / Worldwide</span>
                             </SelectItem>
                           </SelectGroup>
                           <SelectGroup>
