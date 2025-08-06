@@ -3,7 +3,6 @@ import arcjet, { detectBot } from "@/app/utils/arcjet";
 import { auth } from "@/app/utils/auth";
 import { prisma } from "@/app/utils/db";
 import { benefits } from "@/app/utils/listOfBenefits";
-import requireUser from "@/app/utils/requireUser";
 import JsonToHtml from "@/components/layouts/JsonToHtml";
 import SubmitButton from "@/components/layouts/SubmitButton";
 import { Badge } from "@/components/ui/badge";
