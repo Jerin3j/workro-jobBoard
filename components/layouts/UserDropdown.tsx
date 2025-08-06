@@ -59,7 +59,7 @@ export const UserDropdown = ({ email, image, name, userType }: UserProps) => {
             <DropdownMenuItem asChild>
               <Link href={"/applied-jobs"}>
                 <Layers2 size={16} strokeWidth={2} className="opacity-60" />
-                <span>My Applied Listings</span>
+                <span>Applied Jobs</span>
               </Link>
             </DropdownMenuItem>
           )}

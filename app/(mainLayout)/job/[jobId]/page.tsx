@@ -1,8 +1,9 @@
-import { saveJobPost, unSaveJobPost } from "@/app/actions";
+import { applyJob, saveJobPost, unSaveJobPost } from "@/app/actions";
 import arcjet, { detectBot } from "@/app/utils/arcjet";
 import { auth } from "@/app/utils/auth";
 import { prisma } from "@/app/utils/db";
 import { benefits } from "@/app/utils/listOfBenefits";
+import requireUser from "@/app/utils/requireUser";
 import JsonToHtml from "@/components/layouts/JsonToHtml";
 import SubmitButton from "@/components/layouts/SubmitButton";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +15,6 @@ import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React from "react";
 
 const aj = arcjet.withRule(
   detectBot({
@@ -111,6 +111,18 @@ export default async function page({ params }: { params: Params }) {
   if (decision.isDenied()) {
     throw new Error("forbidden");
   }
+  //check if user has applied for the job
+  let isApplied = false;
+  if (session?.user?.id) {
+    const applied = await prisma.appliedJobPost.findFirst({
+      where: {
+        jobPostId: jobId,
+        userId: session.user.id,
+      },
+      select: { id: true },
+    });
+    isApplied = !!applied;
+  }
 
   const { jobData: data, savedJob } = await getJob(jobId, session?.user?.id);
   return (
@@ -190,18 +202,30 @@ export default async function page({ params }: { params: Params }) {
       </div>
 
       <div className="space-y-6">
-        <Card className="p-6">
-          <div className="space-y-4">
-            <div>
-              <h3 className="font-bold">Apply now</h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                Please let {data.Company.name} know you found this job on
-                Workro!. This helps us grow.
-              </p>
+        {session?.user?.userType == "USER" && (
+          <Card className="p-6">
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-bold">Apply now</h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Please let {data.Company.name} know you found this job on
+                  Workro!. This helps us grow.
+                </p>
+              </div>
+              {isApplied ? (
+                <Button disabled className="w-full">
+                  Already Applied
+                </Button>
+              ) : (
+                <form action={applyJob.bind(null, jobId)}>
+                  <Button type="submit" className="w-full cursor-pointer">
+                    Apply now
+                  </Button>
+                </form>
+              )}
             </div>
-            <Button className="w-full">Apply now</Button>
-          </div>
-        </Card>
+          </Card>
+        )}
 
         {/* Job Details Card */}
         <Card className="p-3">

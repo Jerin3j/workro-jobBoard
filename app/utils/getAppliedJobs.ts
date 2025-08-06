@@ -5,6 +5,7 @@ export const getAppliedJobs = async (userId: string) => {
   const data = await prisma.appliedJobPost.findMany({
     where: { userId },
     select: {
+      id: true,
       JobPost: {
         select: {
           id: true,

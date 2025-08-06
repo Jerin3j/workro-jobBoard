@@ -11,7 +11,7 @@ export default async function AppliedJobsPage() {
     return (
       <EmptyState
         title="Not authenticated"
-        description="Please log in to see your saved jobs."
+        description="Please log in to see your applied jobs."
         buttonText="Login"
         href="/login"
       />
@@ -19,12 +19,13 @@ export default async function AppliedJobsPage() {
   }
 
   const data = await getAppliedJobs(session.id);
+  
   await new Promise((resolve) => setTimeout(resolve, 2000));
   if (data.length === 0) {
     return (
       <EmptyState
-        title="No saved jobs found"
-        description="You don't have saved jobs yet."
+        title="No applied jobs found"
+        description="You don't have applied jobs yet."
         buttonText="Find a job"
         href="/"
       />
@@ -34,9 +35,9 @@ export default async function AppliedJobsPage() {
   return (
     <div className="grid grid-cols-1 mt-5 gap-4">
       {data.map(
-        (favorite) =>
-          favorite.JobPost && (
-            <JobCard job={favorite.JobPost} key={favorite.JobPost.id} />
+        (applied) =>
+          applied.JobPost && (
+            <JobCard job={applied.JobPost} key={applied.id} />
           )
       )}
     </div>
