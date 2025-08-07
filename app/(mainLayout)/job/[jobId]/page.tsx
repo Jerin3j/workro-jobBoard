@@ -63,6 +63,7 @@ const getJob = async (jobId: string, userId?: string) => {
         benefits: true,
         createdAt: true,
         listingDuration: true,
+        appliedCount: true,
         Company: {
           select: {
             name: true,
@@ -123,6 +124,7 @@ export default async function page({ params }: { params: Params }) {
     isApplied = !!applied;
   }
 
+  console.log("session?.user?.userType", session?.user);
   const { jobData: data, savedJob } = await getJob(jobId, session?.user?.id);
   return (
     <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8 mt-7 ">
@@ -141,27 +143,37 @@ export default async function page({ params }: { params: Params }) {
             </div>
           </div>
 
-          {session?.user ? (
-            <form
-              action={
-                savedJob
-                  ? unSaveJobPost.bind(null, savedJob.id)
-                  : saveJobPost.bind(null, jobId)
-              }
-            >
-              <SubmitButton savedJob={!!savedJob} />
-            </form>
-          ) : (
-            <Link
-              href={"/login"}
-              className={`${buttonVariants({
-                variant: "outline",
-              })} self-start lg:self-center`}
-            >
-              <Heart className="size-4" />
-              Save Job
-            </Link>
-          )}
+          <div className="flex items-center gap-3">
+            {/* <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-medium shadow-sm border border-blue-200"> */}
+
+            <Badge className=" border border-blue-200" variant={"destructive"}>
+              {data.appliedCount} Applies
+            </Badge>
+
+            {/* </div> */}
+
+            {session?.user ? (
+              <form
+                action={
+                  savedJob
+                    ? unSaveJobPost.bind(null, savedJob.id)
+                    : saveJobPost.bind(null, jobId)
+                }
+              >
+                <SubmitButton savedJob={!!savedJob} />
+              </form>
+            ) : (
+              <Link
+                href={"/login"}
+                className={`${buttonVariants({
+                  variant: "outline",
+                })} self-start lg:self-center`}
+              >
+                <Heart className="size-4" />
+                Save Job
+              </Link>
+            )}
+          </div>
         </div>
         <section>
           <JsonToHtml json={JSON.parse(data.jobDescription)} />
@@ -201,30 +213,34 @@ export default async function page({ params }: { params: Params }) {
       </div>
 
       <div className="space-y-6">
-        {session?.user?.userType == "USER" && (
-          <Card className="p-6">
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-bold">Apply now</h3>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Please let {data.Company.name} know you found this job on
-                  Workro!. This helps us grow.
-                </p>
-              </div>
-              {isApplied ? (
-                <Button disabled className="w-full">
-                  Already Applied
-                </Button>
-              ) : (
-                <form action={applyJob.bind(null, jobId)}>
-                  <Button type="submit" className="w-full cursor-pointer">
-                    Apply now
-                  </Button>
-                </form>
-              )}
+        {/* {session?.user?.userType == "USER" && ( */}
+        <Card className="p-6">
+          <div className="space-y-4">
+            <div>
+              <h3 className="font-bold">Apply now</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Please let {data.Company.name} know you found this job on
+                Workro!. This helps us grow.
+              </p>
             </div>
-          </Card>
-        )}
+            {isApplied ? (
+              <Button disabled className="w-full">
+                Already Applied
+              </Button>
+            ) : (
+              <form action={applyJob.bind(null, jobId)}>
+                <Button
+                  disabled={session?.user?.userType == "COMPANY"}
+                  type="submit"
+                  className="w-full cursor-pointer"
+                >
+                  Apply now
+                </Button>
+              </form>
+            )}
+          </div>
+        </Card>
+        {/* )} */}
 
         {/* Job Details Card */}
         <Card className="p-3">

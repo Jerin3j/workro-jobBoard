@@ -322,6 +322,15 @@ export async function applyJob(jobId: string) {
 
   const employerEmail = jobPost.Company.user.email;
   const jobTitle = jobPost.jobTitle;
+  const appliedCount = jobPost.appliedCount + 1;
+
+  // Update jobPost in db
+  await prisma.jobPost.update({
+    where: { id: jobId },
+    data: {
+      appliedCount: appliedCount,
+    },
+  });
 
   // Send email to user (confirmation)
   await resend.emails.send({
