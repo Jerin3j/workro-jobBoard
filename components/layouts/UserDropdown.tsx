@@ -78,6 +78,7 @@ export const UserDropdown = ({ email, image, name, userType }: UserProps) => {
             action={async () => {
               "use server";
               await signOut({ redirectTo: "/" });
+              window.location.reload();
             }}
           >
             <button className="flex gap-1 items-center w-full">

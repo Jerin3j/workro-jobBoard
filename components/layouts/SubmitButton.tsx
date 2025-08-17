@@ -51,7 +51,7 @@ export default function SubmitButton({savedJob} : {savedJob: boolean}) {
 
   const {pending} = useFormStatus()
   return (
-    <Button variant={'outline'} type="submit" disabled={pending}>
+    <Button variant={'outline'} type="submit" disabled={pending} className="cursor-pointer">
       {pending? (
         <>
         <Loader2 className="size-4 animate-spin"/>

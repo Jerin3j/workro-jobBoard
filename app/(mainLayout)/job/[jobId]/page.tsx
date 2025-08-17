@@ -147,7 +147,7 @@ export default async function page({ params }: { params: Params }) {
           <div className="flex items-center gap-3">
             {/* <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-medium shadow-sm border border-blue-200"> */}
 
-            <Badge className=" border border-blue-200" variant={"destructive"}>
+            <Badge className=" border border-blue-200" variant={"secondary"}>
               {data.appliedCount} Applies
             </Badge>
 
@@ -168,7 +168,7 @@ export default async function page({ params }: { params: Params }) {
                 href={"/login"}
                 className={`${buttonVariants({
                   variant: "outline",
-                })} self-start lg:self-center`}
+                })} self-start lg:self-center cursor-pointer`}
               >
                 <Heart className="size-4" />
                 Save Job
