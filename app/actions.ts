@@ -12,6 +12,7 @@ import Razorpay from "razorpay";
 import { inngest } from "./utils/inngest/client";
 import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
+import { NodeMail } from "./utils/NodeMail";
 
 const aj = arcjet
   .withRule(
@@ -358,3 +359,41 @@ export async function applyJob(jobId: string) {
            to view applicant details.</p>`,
   });
 }
+export const handleAcceptSendEmail = async ({
+  userEmail,
+  userName,
+  jobTitle,
+}: {
+  userEmail: string;
+  userName?: string;
+  jobTitle: string;
+}) => {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  try {
+    const data = await resend.emails.send({
+      from: "Workro! <onboarding@resend.dev>",
+      to: userEmail,
+      subject: `We Received Your Job Application for ${jobTitle}`,
+      html: `
+        <p>Hi ${userName ? userName : "there"},</p>
+        <p>
+          Thank you for applying to <strong>${jobTitle}</strong> at Workro!<br/>
+          We're excited to review your application and will reach out if your profile matches our requirements.
+        </p>
+        <p>
+          If you have questions or wish to provide additional information, please reply to this email.<br/>
+          <br/>
+          Best of luck!<br/>
+          The Workro! Team
+        </p>
+      `,
+    });
+
+    console.log("Email sent successfully:", data);
+    return data;
+  } catch (error) {
+    console.error(" Error sending email:", error);
+    throw error;
+  }
+};

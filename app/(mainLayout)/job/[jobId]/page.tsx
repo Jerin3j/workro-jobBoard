@@ -3,6 +3,7 @@ import arcjet, { detectBot } from "@/app/utils/arcjet";
 import { auth } from "@/app/utils/auth";
 import { prisma } from "@/app/utils/db";
 import { benefits } from "@/app/utils/listOfBenefits";
+import { ApplyJobButton } from "@/components/layouts/ApplyJobButton";
 import JsonToHtml from "@/components/layouts/JsonToHtml";
 import SubmitButton from "@/components/layouts/SubmitButton";
 import { Badge } from "@/components/ui/badge";
@@ -223,7 +224,7 @@ export default async function page({ params }: { params: Params }) {
                 Workro!. This helps us grow.
               </p>
             </div>
-            {isApplied ? (
+            {/* {isApplied ? (
               <Button disabled className="w-full">
                 Already Applied
               </Button>
@@ -237,7 +238,9 @@ export default async function page({ params }: { params: Params }) {
                   Apply now
                 </Button>
               </form>
-            )}
+            )} */}
+            <ApplyJobButton jobId={jobId} session={session} isApplied={isApplied} />
+
           </div>
         </Card>
         {/* )} */}

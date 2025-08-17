@@ -63,6 +63,14 @@ export const UserDropdown = ({ email, image, name, userType }: UserProps) => {
               </Link>
             </DropdownMenuItem>
           )}
+             {userType === "COMPANY" && (
+            <DropdownMenuItem asChild>
+              <Link href={"/applications"}>
+                <Layers2 size={16} strokeWidth={2} className="opacity-60" />
+                <span>Applications</span>
+              </Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
