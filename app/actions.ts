@@ -12,7 +12,6 @@ import Razorpay from "razorpay";
 import { inngest } from "./utils/inngest/client";
 import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
-import { NodeMail } from "./utils/NodeMail";
 
 const aj = arcjet
   .withRule(

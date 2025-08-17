@@ -16,7 +16,7 @@ export function ApplyJobButton({ jobId, session, isApplied }: any) {
     );
   }
 
-  async function handleApply(formData: FormData) {
+  async function handleApply() {
     startTransition(async () => {
       try {
         await applyJob(jobId); // call server action

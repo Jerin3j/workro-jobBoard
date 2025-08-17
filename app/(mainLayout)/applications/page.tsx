@@ -19,19 +19,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { AlertCircleIcon, Terminal } from "lucide-react";
+import { AlertCircleIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { Resend } from "resend";
 
-export async function getEmployerApplications(employerId: string) {
-  console.log("employerId", employerId);
-
+ async function getEmployerApplications(employerId: string) {
   const data = await prisma.appliedJobPost.findMany({
     where: {
       JobPost: {
         Company: {
-          userId: employerId, // <-- match employer's user id
+          userId: employerId, 
         },
       },
     },
@@ -53,7 +50,6 @@ export async function getEmployerApplications(employerId: string) {
 
 export default async function page() {
   const session = await requireUser();
-  const resend = new Resend(process.env.RESEND_API_KEY);
   const jobApplications = await getEmployerApplications(session.id as string);
 
   return (
@@ -77,7 +73,7 @@ export default async function page() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Applicant's Name</TableHead>
+                  <TableHead>Applicant&apos;s Name</TableHead>
                   <TableHead>Email</TableHead>
                   <TableHead>Resume</TableHead>
                   <TableHead>Applied At</TableHead>
@@ -110,7 +106,7 @@ export default async function page() {
                         "use server";
                         await handleAcceptSendEmail({
                           userEmail: application.User.email!,
-                          userName: application.User.JobSeeker?.name!,
+                          userName: application.User?.JobSeeker?.name,
                           jobTitle: application.JobPost.jobTitle!,
                         });
                       }}

@@ -1,4 +1,4 @@
-import { applyJob, saveJobPost, unSaveJobPost } from "@/app/actions";
+import { saveJobPost, unSaveJobPost } from "@/app/actions";
 import arcjet, { detectBot } from "@/app/utils/arcjet";
 import { auth } from "@/app/utils/auth";
 import { prisma } from "@/app/utils/db";
@@ -7,7 +7,7 @@ import { ApplyJobButton } from "@/components/layouts/ApplyJobButton";
 import JsonToHtml from "@/components/layouts/JsonToHtml";
 import SubmitButton from "@/components/layouts/SubmitButton";
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { request, tokenBucket } from "@arcjet/next";
