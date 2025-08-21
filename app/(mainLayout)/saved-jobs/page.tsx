@@ -25,7 +25,7 @@ export default async function SavedJobsPage() {
       <EmptyState
         title="No saved jobs found"
         description="You don't have saved jobs yet."
-        buttonText="Find a job"
+        buttonText="Home"
         href="/"
       />
     );

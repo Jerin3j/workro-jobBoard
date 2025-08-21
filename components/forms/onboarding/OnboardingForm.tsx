@@ -31,7 +31,7 @@ export const OnboardingForm = () => {
   return (
     <div className="flex flex-col gap- items-center">
       <div className="flex items-center gap-4 mb-10">
-        <Image src={Logo} width={50} height={50} alt="" />
+        <Image src={"/workro-logo.png"} width={50} height={50} alt="" />
         <h1 className="text-2xl font-bold">
           Workro
           <span className="text-primary">!</span>

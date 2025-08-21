@@ -22,8 +22,8 @@ export default async function loading() {
                 <Skeleton className="h-4 w-[120px]" />
               </div>
               <div className="flex flex-col gap-4 mt-4">
-                <Skeleton className="h-3 w-full" />
-                <Skeleton className="h-3 w-full" />
+                <Skeleton className="h-3 w-[120px] md:w-full" />
+                <Skeleton className="h-3 w-[120px] md:w-full" />
               </div>
             </div>
             <div className="space-y-2 -mt-12">

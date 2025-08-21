@@ -11,7 +11,7 @@ export function ApplyJobButton({ jobId, session, isApplied }: any) {
   if (isApplied || localApplied) {
     return (
       <Button disabled className="w-full">
-        Already Applied
+         Applied
       </Button>
     );
   }

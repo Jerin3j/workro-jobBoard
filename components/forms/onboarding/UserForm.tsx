@@ -58,7 +58,7 @@ export const UserForm = () => {
             <FormItem>
               <FormLabel>Full Name*</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your full name" {...field} />
+                <Input placeholder="Enter your full name" {...field} className="w-full min-h-[44px]"/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -72,7 +72,7 @@ export const UserForm = () => {
               <FormLabel>Short Bio*</FormLabel>
               <FormControl>
                 <Textarea
-                  className="field-sizing-fixed"
+                  className="field-sizing-fixed w-full min-h-[80px] resize-none"
                   placeholder="Tell us about yourself"
                   {...field}
                 />

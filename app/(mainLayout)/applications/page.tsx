@@ -1,6 +1,7 @@
 import { handleAcceptSendEmail } from "@/app/actions";
 import { prisma } from "@/app/utils/db";
 import requireUser from "@/app/utils/requireUser";
+import EmptyState from "@/components/layouts/EmptyState";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,16 +20,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { AlertCircleIcon } from "lucide-react";
+import { AlertCircleIcon, DownloadIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
- async function getEmployerApplications(employerId: string) {
+async function getEmployerApplications(employerId: string) {
   const data = await prisma.appliedJobPost.findMany({
     where: {
       JobPost: {
         Company: {
-          userId: employerId, 
+          userId: employerId,
         },
       },
     },
@@ -52,6 +53,17 @@ export default async function page() {
   const session = await requireUser();
   const jobApplications = await getEmployerApplications(session.id as string);
 
+  if (jobApplications.length === 0) {
+      return (
+        <EmptyState
+          title="No Applications Found"
+          description="You have not received any applications yet."
+          buttonText="Find a job"
+          href="/"
+        />
+      );
+    }
+  
   return (
     <div>
       {jobApplications.map((application) => (
@@ -87,10 +99,10 @@ export default async function page() {
                   <TableCell>
                     <Link
                       href={application.User?.JobSeeker?.resume as string}
-                      className="text-blue-500 hover:underline"
                       target="_blank"
+                      className="flex items-center gap-1 text-blue-500 hover:underline"
                     >
-                      resume
+                      <DownloadIcon size={16} /> Resume
                     </Link>
                   </TableCell>
                   <TableCell>
@@ -126,14 +138,12 @@ export default async function page() {
           </CardContent>
         </Card>
       ))}
-      <Alert
-        variant="destructive"
-        className="grid w-full max-w-md items-start"
-      >
+      <Alert variant="destructive" className="grid w-full max-w-md items-start">
         <AlertCircleIcon />
         <AlertTitle>Cannot send email</AlertTitle>
         <AlertDescription>
-          Email sending is currently disabled because the Resend domain is not added. Please contact support.
+          Email sending is currently disabled because the Resend domain is not
+          added. Please contact support.
         </AlertDescription>
       </Alert>
     </div>
