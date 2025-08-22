@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Workro – A SaaS Job Board App  
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat&logo=next.js)  
+![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=flat&logo=typescript)  
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat&logo=tailwind-css&logoColor=white)  
+![Shadcn/UI](https://img.shields.io/badge/Shadcn/UI-000000?style=flat)  
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat&logo=prisma)  
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white)  
+![NextAuth](https://img.shields.io/badge/Auth-NextAuth.js-black?style=flat&logo=auth0)  
+![Razorpay](https://img.shields.io/badge/Payments-Razorpay-blue?style=flat&logo=razorpay)  
+![Tiptap](https://img.shields.io/badge/RichText-Tiptap-purple?style=flat)  
+![Arcjet](https://img.shields.io/badge/Arcjet-Security-orange?style=flat)  
+![Inngest](https://img.shields.io/badge/Inngest-Event--Driven-darkblue?style=flat)  
+![UploadThing](https://img.shields.io/badge/UploadThing-File--Uploads-purple?style=flat)  
+![Resend](https://img.shields.io/badge/Resend-Email-green?style=flat)  
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📖 Overview  
+![Workro Logo](public/workro-logo.png)
+**Workro** is a **SaaS Job Board App** built with **Next.js, TypeScript, Tailwind CSS, Prisma, and MongoDB**.  
+It streamlines the job application process for **job seekers** and **companies**, while enabling **subscription-based monetization** through **Razorpay payments**.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Workro demonstrates how to build a **multi-tenant SaaS product** with authentication, payments, dashboards, and real-world workflows.  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Features  
 
-## Learn More
+### 👨‍💼 For Job Seekers  
+- Create **job seeker profile**  
+- Upload and update resumes/CVs (via **Uploadthing**)  
+- Browse available job listings  
+- Apply directly to jobs  
+- Track application status through mail
 
-To learn more about Next.js, take a look at the following resources:
+### 🏢 For Companies  
+- Create **company profiles**  
+- Post new job opportunities with a **rich text editor (Tiptap)**  
+- View and filter applicants  
+- Manage applications efficiently  
+- Unlock **premium job postings** via **Razorpay** payments  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### ⚙️ Core Functionality  
+- **Authentication & Authorization** with NextAuth  
+- **Form Validation** using Zod + React Hook Form  
+- **Database Management** with Prisma ORM (MongoDB)  
+- **File Uploads** powered by Uploadthing  
+- **Event-driven tasks** with Inngest  
+- **Security & Rate-limiting** using Arcjet  
+- **Responsive UI** with Tailwind CSS & ShadCN UI  
+- **Email Handling** via Resend (demo mode with alerts instead of real emails)  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠️ Tech Stack  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Frontend:** Next.js 14, TypeScript, React, Tailwind CSS, ShadCN UI, Radix UI, Lucide Icons  
+- **Backend:** Next.js App Router, Prisma, REST APIs  
+- **Database:** MongoDB  
+- **Auth:** NextAuth (OAuth, Credentials, etc.)  
+- **Validation:** Zod + React Hook Form  
+- **File Uploads:** Uploadthing  
+- **Rich Text Editor:** Tiptap  
+- **Payments:** Razorpay  
+- **Background Tasks:** Inngest  
+- **Security:** Arcjet  
+- **Email Service:** Resend (with UI alert fallback in demo mode)  
+- **Developer Experience:** ESLint, Prettier, Tailwind-merge, class-variance-authority  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📸 Screenshots  
+
+> _(Add screenshots or GIFs of your app here to showcase the flow — job seeker signup, job posting with rich text, premium payments, and application process.)_  
+
+---
+
+## 📜 License  
+
+This project is licensed under the **MIT License** – free to use, modify, and distribute.  
+
+---
+
+## 👤 Author  
+
+**Jerin Jerome Justin**  
+🔗 [GitHub](https://github.com/jerin3j) • [LinkedIn](https://linkedin.com/in/jerin-jerome-justin)  
+
+---

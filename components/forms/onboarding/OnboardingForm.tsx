@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import Logo from "@/public/logo.png";
 import { Card, CardContent } from "@/components/ui/card";
 import { UserTypeForm } from "./UserTypeForm";
 import { CompanyForm } from "./CompanyForm";
