@@ -48,7 +48,6 @@ interface iAppProps {
   companyWebsite: string;
 }
 
-
 export const CreateJobForm = ({
   companyAbout,
   companyLinkedinAccount,
@@ -57,8 +56,6 @@ export const CreateJobForm = ({
   companyWebsite,
   companyLogo,
 }: iAppProps) => {
-
-
   //array of objs into flat array
   const indianCities = Object.entries(IndianCities).flatMap(([key, values]) =>
     values.map((value) => `${key}, ${value}`)
@@ -80,8 +77,8 @@ export const CreateJobForm = ({
       jobTitle: "",
       listingDuration: 30,
       location: "",
-      salaryFrom: 0,
-      salaryTo: 0,
+      salaryFrom: 10000,
+      salaryTo: 20000,
     },
   });
 
@@ -101,7 +98,6 @@ export const CreateJobForm = ({
         throw new Error(" Job ID is undefined");
       }
       await handlePayment(pricingTier, jobId, router);
-
     } catch (error) {
       if (error instanceof Error && error.message !== "NEXT_REDIRECT") {
         console.log("Something went wrong:", error.message);
@@ -414,7 +410,10 @@ export const CreateJobForm = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <JobListingSelector field={field as any} disabled={false}/>
+                      <JobListingSelector
+                        field={field as any}
+                        disabled={false}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

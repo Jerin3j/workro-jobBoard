@@ -1,6 +1,5 @@
 "use client";
 
-
 declare global {
   interface Window {
     Razorpay: any;
@@ -12,9 +11,7 @@ export async function handlePayment(
   jobId: string,
   router: any
 ) {
-
   try {
-
     //POST req for Free Listing
     let isFree = false;
     if (String(pricingTier.price) === "Free") {
@@ -32,7 +29,7 @@ export async function handlePayment(
       if (verifyResponse.ok) {
         router.push("/");
       }
-      return; 
+      return;
     }
 
     const response = await fetch("/api/razorpay", {
@@ -54,7 +51,7 @@ export async function handlePayment(
       handler: async function (response: any) {
         console.log(" Payment Successful:", response);
 
-     //POST req for Paid Listing
+        //POST req for Paid Listing
         try {
           const verifyResponse = await fetch("/api/payment-verify", {
             method: "POST",
@@ -66,7 +63,8 @@ export async function handlePayment(
           console.log("Verification Response Data:", verifyData);
 
           if (verifyResponse.ok) {
-            router.push("/payment-success");
+            // router.push("/payment-success");
+            window.location.href = "/payment-success";
           } else {
             router.push("/payment-failed");
           }
