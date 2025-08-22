@@ -18,8 +18,12 @@
 
 ## 📖 Overview
 
-<img src="public/workro-logo.png" alt="Workro Logo" width="50" height="50" />
-**Workro** is a **SaaS Job Board App** built with **Next.js, TypeScript, Tailwind CSS, Prisma, and MongoDB**.  
+<p align="center">
+  <img src="public/workro-logo.png" alt="Workro Logo" width="50" height="50" />
+</p>
+
+<h1 align="center"> Workro – A SaaS Job Board App</h1>
+**Workro** is built with **Next.js, TypeScript, Tailwind CSS, Prisma, and MongoDB**.  
 It streamlines the job application process for **job seekers** and **companies**, while enabling **subscription-based monetization** through **Razorpay payments**.
 
 Workro demonstrates how to build a **multi-tenant SaaS product** with authentication, payments, dashboards, and real-world workflows.
@@ -77,13 +81,13 @@ Workro demonstrates how to build a **multi-tenant SaaS product** with authentica
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="screenshots/applicants.jpg" alt="Applicants" width="180"/>
-  <img src="screenshots/Home.jpg" alt="Home" width="180"/>
-  <img src="screenshots/job-post.jpg" alt="Job Post" width="180"/>
-  <img src="screenshots/jobpost-preview.jpg" alt="Job Post Preview" width="180"/>
-  <img src="screenshots/my-jobs.jpg" alt="My Jobs" width="180"/>
-  <img src="screenshots/payment.jpg" alt="Payment" width="180"/>
-  <img src="screenshots/pricing-plans.jpg" alt="Pricing Plans" width="180"/>
+  <img src="public/snaps/applicants.png" alt="Applicants" width="420"/>
+  <img src="public/snaps/Home.jpg" alt="Home" width="420"/>
+  <img src="public/snaps/job-post.jpg" alt="Job Post" width="420"/>
+  <img src="public/snaps/jobpost-preview.jpg" alt="Job Post Preview" width="420"/>
+  <img src="public/snaps/my-jobs.jpg" alt="My Jobs" width="420"/>
+  <img src="public/snaps/payment.jpg" alt="Payment" width="420"/>
+  <img src="public/snaps/pricing-plans.jpg" alt="Pricing Plans" width="420"/>
 </p>
 
 ---
@@ -97,6 +101,6 @@ This project is licensed under the **MIT License** – free to use, modify, and 
 ## 👤 Author
 
 **Jerin Jerome Justin**  
-🔗 [GitHub](https://github.com/jerin3j) • [LinkedIn](https://linkedin.com/in/jerin-jerome-justin)
+🔗 [GitHub](https://github.com/jerin3j) • [LinkedIn](https://www.linkedin.com/in/jerin-jerome-justin)
 
 ---
