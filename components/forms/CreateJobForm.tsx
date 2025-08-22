@@ -77,7 +77,7 @@ export const CreateJobForm = ({
       jobTitle: "",
       listingDuration: 30,
       location: "",
-      salaryFrom: 10000,
+      salaryFrom: 1000,
       salaryTo: 20000,
     },
   });
