@@ -1,4 +1,4 @@
-# 🚀 Workro – A SaaS Job Board App  
+# 🚀 Workro – A SaaS Job Board App
 
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat&logo=next.js)  
 ![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=flat&logo=typescript)  
@@ -12,79 +12,91 @@
 ![Arcjet](https://img.shields.io/badge/Arcjet-Security-orange?style=flat)  
 ![Inngest](https://img.shields.io/badge/Inngest-Event--Driven-darkblue?style=flat)  
 ![UploadThing](https://img.shields.io/badge/UploadThing-File--Uploads-purple?style=flat)  
-![Resend](https://img.shields.io/badge/Resend-Email-green?style=flat)  
+![Resend](https://img.shields.io/badge/Resend-Email-green?style=flat)
 
 ---
 
-## 📖 Overview  
-![Workro Logo](public/workro-logo.png)
+## 📖 Overview
+
+<img src="public/workro-logo.png" alt="Workro Logo" width="50" height="50" />
 **Workro** is a **SaaS Job Board App** built with **Next.js, TypeScript, Tailwind CSS, Prisma, and MongoDB**.  
-It streamlines the job application process for **job seekers** and **companies**, while enabling **subscription-based monetization** through **Razorpay payments**.  
+It streamlines the job application process for **job seekers** and **companies**, while enabling **subscription-based monetization** through **Razorpay payments**.
 
-Workro demonstrates how to build a **multi-tenant SaaS product** with authentication, payments, dashboards, and real-world workflows.  
+Workro demonstrates how to build a **multi-tenant SaaS product** with authentication, payments, dashboards, and real-world workflows.
 
 ---
 
-## ✨ Features  
+## ✨ Features
 
-### 👨‍💼 For Job Seekers  
-- Create **job seeker profile**  
-- Upload and update resumes/CVs (via **Uploadthing**)  
-- Browse available job listings  
-- Apply directly to jobs  
+### 👨‍💼 For Job Seekers
+
+- Create **job seeker profile**
+- Upload and update resumes/CVs (via **Uploadthing**)
+- Browse available job listings
+- Apply directly to jobs
 - Track application status through mail
 
-### 🏢 For Companies  
-- Create **company profiles**  
-- Post new job opportunities with a **rich text editor (Tiptap)**  
-- View and filter applicants  
-- Manage applications efficiently  
-- Unlock **premium job postings** via **Razorpay** payments  
+### 🏢 For Companies
 
-### ⚙️ Core Functionality  
-- **Authentication & Authorization** with NextAuth  
-- **Form Validation** using Zod + React Hook Form  
-- **Database Management** with Prisma ORM (MongoDB)  
-- **File Uploads** powered by Uploadthing  
-- **Event-driven tasks** with Inngest  
-- **Security & Rate-limiting** using Arcjet  
-- **Responsive UI** with Tailwind CSS & ShadCN UI  
-- **Email Handling** via Resend (demo mode with alerts instead of real emails)  
+- Create **company profiles**
+- Post new job opportunities with a **rich text editor (Tiptap)**
+- View and filter applicants
+- Manage applications efficiently
+- Unlock **premium job postings** via **Razorpay** payments
 
----
+### ⚙️ Core Functionality
 
-## 🛠️ Tech Stack  
-
-- **Frontend:** Next.js 14, TypeScript, React, Tailwind CSS, ShadCN UI, Radix UI, Lucide Icons  
-- **Backend:** Next.js App Router, Prisma, REST APIs  
-- **Database:** MongoDB  
-- **Auth:** NextAuth (OAuth, Credentials, etc.)  
-- **Validation:** Zod + React Hook Form  
-- **File Uploads:** Uploadthing  
-- **Rich Text Editor:** Tiptap  
-- **Payments:** Razorpay  
-- **Background Tasks:** Inngest  
-- **Security:** Arcjet  
-- **Email Service:** Resend (with UI alert fallback in demo mode)  
-- **Developer Experience:** ESLint, Prettier, Tailwind-merge, class-variance-authority  
+- **Authentication & Authorization** with NextAuth
+- **Form Validation** using Zod + React Hook Form
+- **Database Management** with Prisma ORM (MongoDB)
+- **File Uploads** powered by Uploadthing
+- **Event-driven tasks** with Inngest
+- **Security & Rate-limiting** using Arcjet
+- **Responsive UI** with Tailwind CSS & ShadCN UI
+- **Email Handling** via Resend (demo mode with alerts instead of real emails)
 
 ---
 
-## 📸 Screenshots  
+## 🛠️ Tech Stack
 
-> _(Add screenshots or GIFs of your app here to showcase the flow — job seeker signup, job posting with rich text, premium payments, and application process.)_  
+- **Frontend:** Next.js 14, TypeScript, React, Tailwind CSS, ShadCN UI, Radix UI, Lucide Icons
+- **Backend:** Next.js App Router, Prisma, REST APIs
+- **Database:** MongoDB
+- **Auth:** NextAuth (OAuth, Credentials, etc.)
+- **Validation:** Zod + React Hook Form
+- **File Uploads:** Uploadthing
+- **Rich Text Editor:** Tiptap
+- **Payments:** Razorpay
+- **Background Tasks:** Inngest
+- **Security:** Arcjet
+- **Email Service:** Resend (with UI alert fallback in demo mode)
+- **Developer Experience:** ESLint, Prettier, Tailwind-merge, class-variance-authority
 
 ---
 
-## 📜 License  
+## 📸 Screenshots
 
-This project is licensed under the **MIT License** – free to use, modify, and distribute.  
+<p align="center">
+  <img src="screenshots/applicants.jpg" alt="Applicants" width="180"/>
+  <img src="screenshots/Home.jpg" alt="Home" width="180"/>
+  <img src="screenshots/job-post.jpg" alt="Job Post" width="180"/>
+  <img src="screenshots/jobpost-preview.jpg" alt="Job Post Preview" width="180"/>
+  <img src="screenshots/my-jobs.jpg" alt="My Jobs" width="180"/>
+  <img src="screenshots/payment.jpg" alt="Payment" width="180"/>
+  <img src="screenshots/pricing-plans.jpg" alt="Pricing Plans" width="180"/>
+</p>
 
 ---
 
-## 👤 Author  
+## 📜 License
+
+This project is licensed under the **MIT License** – free to use, modify, and distribute.
+
+---
+
+## 👤 Author
 
 **Jerin Jerome Justin**  
-🔗 [GitHub](https://github.com/jerin3j) • [LinkedIn](https://linkedin.com/in/jerin-jerome-justin)  
+🔗 [GitHub](https://github.com/jerin3j) • [LinkedIn](https://linkedin.com/in/jerin-jerome-justin)
 
 ---
