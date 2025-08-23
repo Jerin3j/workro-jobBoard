@@ -82,7 +82,7 @@ export const UserDropdown = ({ email, image, name, userType }: UserProps) => {
             }}
           >
             <button className="flex gap-1 items-center w-full text-red-600 hover:text-red-800">
-              <LogOut size={16} strokeWidth={2} className="opacity-60" />
+              <LogOut size={16} strokeWidth={2} className="opacity-60 text-red-600" />
               <span>Logout</span>
             </button>
           </form>
