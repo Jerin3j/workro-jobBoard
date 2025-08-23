@@ -120,9 +120,7 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
     });
 
     try {
-      const uniqueEmail = `${session.email.split("@")[0]}+${Date.now()}@${
-        session.email.split("@")[1]
-      }`;
+      const uniqueEmail = `${session.email.split("@")[0]}+${Date.now()}@${session.email.split("@")[1]}`;
 
       const customer = await razorpay.customers.create({
         email: uniqueEmail,
@@ -130,16 +128,14 @@ export const createJob = async (data: z.infer<typeof jobSchema>) => {
       });
 
       razorpayCustomerId = customer.id;
-      await prisma.user.findUnique({
-        where: { id: session.id },
-      });
 
+      // Save it in DB so next time we reuse it
       await prisma.user.update({
         where: { id: session.id },
-        data: { razorpayCustomerId: razorpayCustomerId },
+        data: { razorpayCustomerId },
       });
     } catch (error) {
-      console.log(error);
+      console.error("Failed to create Razorpay customer:", error);
       throw new Error("Failed to create Razorpay customer");
     }
 
