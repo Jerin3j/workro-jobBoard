@@ -63,7 +63,7 @@ export const UserDropdown = ({ email, image, name, userType }: UserProps) => {
               </Link>
             </DropdownMenuItem>
           )}
-             {userType === "COMPANY" && (
+          {userType === "COMPANY" && (
             <DropdownMenuItem asChild>
               <Link href={"/applications"}>
                 <Layers2 size={16} strokeWidth={2} className="opacity-60" />
@@ -81,8 +81,8 @@ export const UserDropdown = ({ email, image, name, userType }: UserProps) => {
               window.location.reload();
             }}
           >
-            <button className="flex gap-1 items-center w-full">
-              <LogOut size={16} strokeWidth={2} className="opacity-60" />
+            <button className="flex gap-1 items-center w-full text-red-600 hover:text-red-800">
+              <LogOut size={16} strokeWidth={2} className="opacity-60 text-red-600" />
               <span>Logout</span>
             </button>
           </form>
