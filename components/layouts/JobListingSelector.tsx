@@ -50,7 +50,7 @@ export default function JobListingSelector({ field, disabled }: iAppProps ) {
                   <div className="text-right">
                     <p className="font-bold text-xl">₹ {jobPricing.price}</p>
                     <p className="text-sm text-muted-foreground">
-                      {((jobPricing.price as number) / jobPricing.days).toFixed(
+                      {jobPricing.price === 'Free' ? 0 : ((jobPricing.price as number) / jobPricing.days).toFixed(
                         1
                       )}
                       /day
