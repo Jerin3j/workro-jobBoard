@@ -82,12 +82,12 @@ Workro demonstrates how to build a **multi-tenant SaaS product** with authentica
 
 <p align="center">
   <img src="public/snaps/applicants.png" alt="Applicants" width="420"/>
-  <img src="public/snaps/Home.jpg" alt="Home" width="420"/>
-  <img src="public/snaps/job-post.jpg" alt="Job Post" width="420"/>
-  <img src="public/snaps/jobpost-preview.jpg" alt="Job Post Preview" width="420"/>
-  <img src="public/snaps/my-jobs.jpg" alt="My Jobs" width="420"/>
-  <img src="public/snaps/payment.jpg" alt="Payment" width="420"/>
-  <img src="public/snaps/pricing-plans.jpg" alt="Pricing Plans" width="420"/>
+  <img src="public/snaps/Home.png" alt="Home" width="420"/>
+  <img src="public/snaps/job-post.png" alt="Job Post" width="420"/>
+  <img src="public/snaps/jobpost-preview.png" alt="Job Post Preview" width="420"/>
+  <img src="public/snaps/my-jobs.png" alt="My Jobs" width="420"/>
+  <img src="public/snaps/payment.png" alt="Payment" width="420"/>
+  <img src="public/snaps/pricing-plans.png" alt="Pricing Plans" width="420"/>
 </p>
 
 ---
